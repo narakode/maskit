@@ -1,20 +1,15 @@
 <script setup>
 import { computed } from 'vue';
 import { Icon } from '@iconify/vue';
-import Spinner from './Spinner.vue';
+import Spinner from '../Spinner.vue';
+import cssClass from './css-class';
 
 const props = defineProps({
   color: {
     type: String,
     default: 'info',
     validator: (value) =>
-      [
-        'info',
-        'error',
-        'warning',
-        'success',
-        'secondary',
-      ].includes(value),
+      ['info', 'error', 'warning', 'success', 'secondary'].includes(value),
   },
   loading: Boolean,
   withClose: Boolean,
@@ -53,30 +48,13 @@ const icon = computed(() => {
 </script>
 
 <template>
-  <div
-    :class="[
-      'px-4 py-3 rounded-md border flex items-start justify-between gap-2',
-      colorClass,
-    ]"
-  >
+  <div :class="[cssClass.base, colorClass]">
     <div class="flex items-start gap-2">
-      <Spinner
-        v-if="loading"
-        class="mt-1"
-        :color="spinnerColor"
-      />
-      <Icon
-        v-else
-        :icon="icon"
-        class="size-4 mt-1 shrink-0"
-      />
+      <Spinner v-if="loading" class="mt-1" :color="spinnerColor" />
+      <Icon v-else :icon="icon" class="size-4 mt-1 shrink-0" />
       <slot />
     </div>
-    <button
-      v-if="withClose"
-      class="mt-1 cursor-pointer"
-      @click="emit('close')"
-    >
+    <button v-if="withClose" class="mt-1 cursor-pointer" @click="emit('close')">
       <Icon icon="tabler:x" />
     </button>
   </div>
