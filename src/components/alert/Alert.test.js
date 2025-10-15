@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import { test, expect, describe } from 'vitest';
 import Alert from './Alert.vue';
 import cssClass from './css-class';
+import { Icon } from '@iconify/vue';
 
 describe('Alert', () => {
   test('should render text', () => {
@@ -12,6 +13,12 @@ describe('Alert', () => {
     });
 
     expect(wrapper.text()).toBe('Test');
+  });
+
+  test('should render icon', () => {
+    const wrapper = mount(Alert);
+
+    expect(wrapper.findComponent(Icon).exists()).toBe(true);
   });
 
   test('should have base class', () => {
