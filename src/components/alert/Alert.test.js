@@ -21,4 +21,12 @@ describe('Alert', () => {
       expect.arrayContaining(cssClass.base.split(' ')),
     );
   });
+
+  test('should have default color class', () => {
+    const wrapper = mount(Alert);
+
+    expect(wrapper.classes()).toEqual(
+      expect.arrayContaining(cssClass.colors.info.split(' ')),
+    );
+  });
 });

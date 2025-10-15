@@ -17,13 +17,7 @@ const props = defineProps({
 const emit = defineEmits(['close']);
 
 const colorClass = computed(() => {
-  return {
-    info: 'bg-blue-100 border-blue-300 text-blue-600',
-    error: 'bg-red-100 border-red-300 text-red-600',
-    warning: 'bg-yellow-100 border-yellow-300 text-yellow-700',
-    success: 'bg-green-100 border-green-300 text-green-600',
-    secondary: 'bg-gray-100 border-gray-300 text-gray-600',
-  }[props.color || 'info'];
+  return cssClass.colors[props.color || 'info'];
 });
 
 const spinnerColor = computed(() => {
