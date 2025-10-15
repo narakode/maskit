@@ -3,6 +3,7 @@ import { test, expect, describe } from 'vitest';
 import Alert from './Alert.vue';
 import { Icon } from '@iconify/vue';
 import AlertConfig from './Alert.config';
+import Spinner from '../Spinner.vue';
 
 describe('Alert', () => {
   test('should render text', () => {
@@ -62,5 +63,43 @@ describe('Alert', () => {
     const icon = wrapper.findComponent(Icon);
 
     expect(icon.props('icon')).toEqual(AlertConfig.iconNames.success);
+  });
+
+  test('should not render loading spinner by default', () => {
+    const wrapper = mount(Alert);
+
+    const loadingSpinner = wrapper.findComponent(Spinner);
+
+    expect(loadingSpinner.exists()).toBe(false);
+  });
+
+  test('should render loading spinner by loading props', () => {
+    const wrapper = mount(Alert, {
+      props: {
+        loading: true,
+      },
+    });
+
+    const loadingSpinner = wrapper.findComponent(Spinner);
+
+    expect(loadingSpinner.exists()).toBe(true);
+    expect(loadingSpinner.props('color')).toEqual(
+      AlertConfig.spinnerColor.info,
+    );
+  });
+
+  test('should render loading spinner color by color props', () => {
+    const wrapper = mount(Alert, {
+      props: {
+        loading: true,
+        color: 'success',
+      },
+    });
+
+    const loadingSpinner = wrapper.findComponent(Spinner);
+
+    expect(loadingSpinner.props('color')).toEqual(
+      AlertConfig.spinnerColor.success,
+    );
   });
 });

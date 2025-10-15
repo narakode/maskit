@@ -21,13 +21,7 @@ const colorClass = computed(() => {
 });
 
 const spinnerColor = computed(() => {
-  return {
-    info: 'light-primary',
-    error: 'light-error',
-    warning: 'light-warning',
-    success: 'light-success',
-    secondary: 'light',
-  }[props.color || 'info'];
+  return AlertConfig.spinnerColor[props.color || 'info'];
 });
 
 const icon = computed(() => {

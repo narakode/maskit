@@ -14,4 +14,11 @@ export default {
     success: 'tabler:circle-check-filled',
     secondary: 'tabler:info-circle-filled',
   },
+  spinnerColor: {
+    info: 'light-primary',
+    error: 'light-error',
+    warning: 'light-warning',
+    success: 'light-success',
+    secondary: 'light',
+  },
 };
