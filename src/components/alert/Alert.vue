@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { Icon } from '@iconify/vue';
-import Spinner from '../Spinner.vue';
+import Spinner from '../spinner/Spinner.vue';
 import AlertConfig from './Alert.config';
 
 const props = defineProps({
