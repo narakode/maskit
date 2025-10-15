@@ -29,4 +29,16 @@ describe('Alert', () => {
       expect.arrayContaining(cssClass.colors.info.split(' ')),
     );
   });
+
+  test('should have color class by props', () => {
+    const wrapper = mount(Alert, {
+      props: {
+        color: 'success',
+      },
+    });
+
+    expect(wrapper.classes()).toEqual(
+      expect.arrayContaining(cssClass.colors.success.split(' ')),
+    );
+  });
 });
