@@ -102,4 +102,40 @@ describe('Alert', () => {
       AlertConfig.spinnerColor.success,
     );
   });
+
+  test('should not render close button by default', () => {
+    const wrapper = mount(Alert);
+
+    const renderedIcon = wrapper.findAllComponents(Icon);
+
+    expect(renderedIcon).toHaveLength(1);
+    expect(renderedIcon[0].props('icon')).not.toEqual('tabler:x');
+  });
+
+  test('should render close button when closable is true', () => {
+    const wrapper = mount(Alert, {
+      props: {
+        closable: true,
+      },
+    });
+
+    const renderedIcon = wrapper.findAllComponents(Icon);
+
+    expect(renderedIcon).toHaveLength(2);
+    expect(renderedIcon[1].props('icon')).toEqual('tabler:x');
+  });
+
+  test('should emit close event when close button is clicked', () => {
+    const wrapper = mount(Alert, {
+      props: {
+        closable: true,
+      },
+    });
+
+    const closeButton = wrapper.find('button');
+
+    closeButton.trigger('click');
+
+    expect(wrapper.emitted()).toHaveProperty('close');
+  });
 });

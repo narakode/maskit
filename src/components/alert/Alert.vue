@@ -12,7 +12,7 @@ const props = defineProps({
       ['info', 'error', 'warning', 'success', 'secondary'].includes(value),
   },
   loading: Boolean,
-  withClose: Boolean,
+  closable: Boolean,
 });
 const emit = defineEmits(['close']);
 
@@ -36,7 +36,7 @@ const icon = computed(() => {
       <Icon v-else :icon="icon" class="size-4 mt-1 shrink-0" />
       <slot />
     </div>
-    <button v-if="withClose" class="mt-1 cursor-pointer" @click="emit('close')">
+    <button v-if="closable" class="mt-1 cursor-pointer" @click="emit('close')">
       <Icon icon="tabler:x" />
     </button>
   </div>
