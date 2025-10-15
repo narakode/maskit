@@ -1,8 +1,8 @@
 import { mount } from '@vue/test-utils';
 import { test, expect, describe } from 'vitest';
 import Alert from './Alert.vue';
-import cssClass from './css-class';
 import { Icon } from '@iconify/vue';
+import AlertConfig from './Alert.config';
 
 describe('Alert', () => {
   test('should render text', () => {
@@ -18,14 +18,17 @@ describe('Alert', () => {
   test('should render icon', () => {
     const wrapper = mount(Alert);
 
-    expect(wrapper.findComponent(Icon).exists()).toBe(true);
+    const icon = wrapper.findComponent(Icon);
+
+    expect(icon.exists()).toBe(true);
+    expect(icon.props('icon')).toEqual(AlertConfig.iconNames.info);
   });
 
   test('should have base class', () => {
     const wrapper = mount(Alert);
 
     expect(wrapper.classes()).toEqual(
-      expect.arrayContaining(cssClass.base.split(' ')),
+      expect.arrayContaining(AlertConfig.base.split(' ')),
     );
   });
 
@@ -33,11 +36,11 @@ describe('Alert', () => {
     const wrapper = mount(Alert);
 
     expect(wrapper.classes()).toEqual(
-      expect.arrayContaining(cssClass.colors.info.split(' ')),
+      expect.arrayContaining(AlertConfig.colors.info.split(' ')),
     );
   });
 
-  test('should have color class by props', () => {
+  test('should have color class by color prop', () => {
     const wrapper = mount(Alert, {
       props: {
         color: 'success',
@@ -45,7 +48,19 @@ describe('Alert', () => {
     });
 
     expect(wrapper.classes()).toEqual(
-      expect.arrayContaining(cssClass.colors.success.split(' ')),
+      expect.arrayContaining(AlertConfig.colors.success.split(' ')),
     );
+  });
+
+  test('should render icon name by color prop', () => {
+    const wrapper = mount(Alert, {
+      props: {
+        color: 'success',
+      },
+    });
+
+    const icon = wrapper.findComponent(Icon);
+
+    expect(icon.props('icon')).toEqual(AlertConfig.iconNames.success);
   });
 });

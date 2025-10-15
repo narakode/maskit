@@ -7,4 +7,11 @@ export default {
     success: 'bg-green-100 border-green-300 text-green-600',
     secondary: 'bg-gray-100 border-gray-300 text-gray-600',
   },
+  iconNames: {
+    info: 'tabler:info-circle-filled',
+    error: 'tabler:alert-circle-filled',
+    warning: 'tabler:alert-circle-filled',
+    success: 'tabler:circle-check-filled',
+    secondary: 'tabler:info-circle-filled',
+  },
 };

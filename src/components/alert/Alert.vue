@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { Icon } from '@iconify/vue';
 import Spinner from '../Spinner.vue';
-import cssClass from './css-class';
+import AlertConfig from './Alert.config';
 
 const props = defineProps({
   color: {
@@ -17,7 +17,7 @@ const props = defineProps({
 const emit = defineEmits(['close']);
 
 const colorClass = computed(() => {
-  return cssClass.colors[props.color || 'info'];
+  return AlertConfig.colors[props.color || 'info'];
 });
 
 const spinnerColor = computed(() => {
@@ -31,18 +31,12 @@ const spinnerColor = computed(() => {
 });
 
 const icon = computed(() => {
-  return {
-    info: 'tabler:info-circle-filled',
-    error: 'tabler:alert-circle-filled',
-    warning: 'tabler:alert-circle-filled',
-    success: 'tabler:circle-check-filled',
-    secondary: 'tabler:info-circle-filled',
-  }[props.color || 'info'];
+  return AlertConfig.iconNames[props.color || 'info'];
 });
 </script>
 
 <template>
-  <div :class="[cssClass.base, colorClass]">
+  <div :class="[AlertConfig.base, colorClass]">
     <div class="flex items-start gap-2">
       <Spinner v-if="loading" class="mt-1" :color="spinnerColor" />
       <Icon v-else :icon="icon" class="size-4 mt-1 shrink-0" />
