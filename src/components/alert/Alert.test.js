@@ -3,7 +3,7 @@ import { test, expect, describe } from 'vitest';
 import Alert from './Alert.vue';
 import { Icon } from '@iconify/vue';
 import AlertConfig from './Alert.config';
-import Spinner from '../Spinner.vue';
+import Spinner from '../spinner/Spinner.vue';
 
 describe('Alert', () => {
   test('should render text', () => {
