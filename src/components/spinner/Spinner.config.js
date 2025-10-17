@@ -4,12 +4,10 @@ export default {
     lg: 'w-6 h-6',
   },
   colors: {
-    light: 'text-gray-200',
     info: 'text-blue-600',
-    'light-primary': 'text-blue-200',
-    'light-error': 'text-red-200',
-    'light-success': 'text-green-200',
-    'light-warning': 'text-yellow-200',
+    warning: 'text-yellow-600',
+    error: 'text-red-600',
+    success: 'text-green-600',
     secondary: 'text-gray-700',
   },
 };

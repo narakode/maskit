@@ -83,9 +83,7 @@ describe('Alert', () => {
     const loadingSpinner = wrapper.findComponent(Spinner);
 
     expect(loadingSpinner.exists()).toBe(true);
-    expect(loadingSpinner.props('color')).toEqual(
-      AlertConfig.spinnerColor.info,
-    );
+    expect(loadingSpinner.props('color')).toEqual('info');
   });
 
   test('should render loading spinner color by color props', () => {
@@ -98,9 +96,7 @@ describe('Alert', () => {
 
     const loadingSpinner = wrapper.findComponent(Spinner);
 
-    expect(loadingSpinner.props('color')).toEqual(
-      AlertConfig.spinnerColor.success,
-    );
+    expect(loadingSpinner.props('color')).toEqual('success');
   });
 
   test('should not render close button by default', () => {

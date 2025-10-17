@@ -32,7 +32,7 @@ describe('Spinner', () => {
     const wrapper = mount(Spinner);
 
     expect(wrapper.classes()).toEqual(
-      expect.arrayContaining(SpinnerConfig.colors.light.split(' ')),
+      expect.arrayContaining(SpinnerConfig.colors.info.split(' ')),
     );
   });
 
