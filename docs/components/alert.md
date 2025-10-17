@@ -58,7 +58,9 @@ Alert bisa diberikan loading spinner dengan props `loading`, nilainya boolean. D
 Alert bisa diberikan tombol close di ujung dengan props `closable`, nilainya boolean. Defaultnya `false`. Ketika tombol close diklik, alert akan memicu event `close`.
 
 ```vue
-<Alert closable @close="console.log('close alert')">Alert dapat diclose</Alert>
+<Alert closable @close="console.log('close alert')">
+  Alert dapat diclose
+</Alert>
 ```
 
 ::: raw

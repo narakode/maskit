@@ -17,7 +17,10 @@ export default defineConfig({
     sidebar: [
       {
         text: 'Components',
-        items: [{ text: 'Alert', link: '/components/alert' }],
+        items: [
+          { text: 'Alert', link: '/components/alert' },
+          { text: 'Spinner', link: '/components/spinner' },
+        ],
       },
     ],
 
