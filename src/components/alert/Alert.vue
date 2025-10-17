@@ -20,10 +20,6 @@ const colorClass = computed(() => {
   return AlertConfig.colors[props.color || 'info'];
 });
 
-const spinnerColor = computed(() => {
-  return AlertConfig.spinnerColor[props.color || 'info'];
-});
-
 const icon = computed(() => {
   return AlertConfig.iconNames[props.color || 'info'];
 });
@@ -32,7 +28,7 @@ const icon = computed(() => {
 <template>
   <div :class="[AlertConfig.base, colorClass]">
     <div class="flex items-start gap-2">
-      <Spinner v-if="loading" class="mt-1" :color="spinnerColor" />
+      <Spinner v-if="loading" class="mt-1" :color="color" />
       <Icon v-else :icon="icon" class="size-4 mt-1 shrink-0" />
       <slot />
     </div>
