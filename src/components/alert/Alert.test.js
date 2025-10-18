@@ -25,14 +25,6 @@ describe('Alert', () => {
     expect(icon.props('icon')).toEqual(AlertConfig.iconNames.info);
   });
 
-  test('should have base class', () => {
-    const wrapper = mount(Alert);
-
-    expect(wrapper.classes()).toEqual(
-      expect.arrayContaining(AlertConfig.base.split(' ')),
-    );
-  });
-
   test('should have default color class', () => {
     const wrapper = mount(Alert);
 

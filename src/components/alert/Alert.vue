@@ -26,7 +26,12 @@ const icon = computed(() => {
 </script>
 
 <template>
-  <div :class="[AlertConfig.base, colorClass]">
+  <div
+    :class="[
+      'px-4 py-3 rounded-md border flex items-start justify-between gap-2',
+      colorClass,
+    ]"
+  >
     <div class="flex items-start gap-2">
       <Spinner v-if="loading" class="mt-1" :color="color" />
       <Icon v-else :icon="icon" class="size-4 mt-1 shrink-0" />
