@@ -4,6 +4,6 @@ export default {
     error: 'bg-red-100 text-red-800',
     warning: 'bg-yellow-100 text-yellow-800',
     success: 'bg-green-100 text-green-800',
-    secondary: 'bg-secondary-100 text-secondary-800',
+    secondary: 'bg-gray-100 text-gray-800',
   },
 };
