@@ -8,7 +8,7 @@ import Spinner from '../../src/components/spinner/Spinner.vue'
 
 # Spinner
 
-Spinner adalah komponen untuk menampil icon loader yang beranimasi spin. Biasa digunakan ketika proses sedang loading.
+Spinner adalah komponen untuk menampilkan icon loader yang beranimasi spin. Biasa digunakan ketika proses sedang loading.
 
 ## Contoh
 

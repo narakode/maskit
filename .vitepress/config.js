@@ -20,6 +20,7 @@ export default defineConfig({
         items: [
           { text: 'Alert', link: '/components/alert' },
           { text: 'Spinner', link: '/components/spinner' },
+          { text: 'Badge', link: '/components/badge' },
         ],
       },
     ],
