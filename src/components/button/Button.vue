@@ -20,6 +20,7 @@ const props = defineProps({
         'bordered',
       ].includes(value),
   },
+  bordered: Boolean,
   size: {
     type: String,
     default: 'md',
@@ -51,7 +52,12 @@ const colorClass = computed(() => {
   if (props.overrideColor) {
     return '';
   }
-  return ButtonConfig.colors[props.color || 'secondary'];
+  return [
+    ButtonConfig.colors[props.color || 'secondary'],
+    props.bordered
+      ? ['border', ButtonConfig.borderColors[props.color || 'secondary']]
+      : '',
+  ];
 });
 
 const spinnerColor = computed(() => {
