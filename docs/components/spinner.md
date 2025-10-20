@@ -22,10 +22,10 @@ Spinner adalah komponen untuk menampilkan icon loader yang beranimasi spin. Bias
 
 ## Warna
 
-Spinner bisa diatur warnanya dengan props `color`, nilainya bisa `info`, `error`, `warning`, `success` dan `secondary`. Defaultnya `info`.
+Spinner bisa diatur warnanya dengan props `color`, nilainya bisa `primary`, `error`, `warning`, `success` dan `secondary`. Defaultnya `primary`.
 
 ```vue
-<Spinner color="info" />
+<Spinner color="primary" />
 <Spinner color="error" />
 <Spinner color="warning" />
 <Spinner color="success" />
@@ -33,7 +33,7 @@ Spinner bisa diatur warnanya dengan props `color`, nilainya bisa `info`, `error`
 ```
 
 ::: raw
-<Spinner color="info" />
+<Spinner color="primary" />
 <Spinner color="error" />
 <Spinner color="warning" />
 <Spinner color="success" />
@@ -66,7 +66,7 @@ Atau bisa juga dioverride dengan menambahkan class ke component, misalnya `w-20 
 
 ## Props
 
-| Nama    | Type                                                       | Wajib? | Default | Fungsi          |
-| ------- | ---------------------------------------------------------- | ------ | ------- | --------------- |
-| `color` | `enum('info', 'error', 'warning', 'success', 'secondary')` | :x:    | `info`  | Mengatur warna  |
-| `size`  | `enum('md', 'lg')`                                         | :x:    | `md`    | Mengatur ukuran |
+| Nama    | Type                                                          | Wajib? | Default   | Fungsi          |
+| ------- | ------------------------------------------------------------- | ------ | --------- | --------------- |
+| `color` | `enum('primary', 'error', 'warning', 'success', 'secondary')` | :x:    | `primary` | Mengatur warna  |
+| `size`  | `enum('md', 'lg')`                                            | :x:    | `md`      | Mengatur ukuran |

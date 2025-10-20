@@ -46,7 +46,6 @@ const props = defineProps({
   tag: {
     default: 'button',
   },
-  type: String,
 });
 
 const colorClass = computed(() => {
@@ -82,7 +81,6 @@ const sizeClass = computed(() => {
 <template>
   <component
     :is="tag"
-    :type="type"
     :disabled="disabled || loading"
     :class="[
       'rounded-md font-medium cursor-pointer inline-flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed',

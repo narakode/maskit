@@ -7,9 +7,9 @@ import AlertConfig from './Alert.config';
 const props = defineProps({
   color: {
     type: String,
-    default: 'info',
+    default: 'primary',
     validator: (value) =>
-      ['info', 'error', 'warning', 'success', 'secondary'].includes(value),
+      ['primary', 'error', 'warning', 'success', 'secondary'].includes(value),
   },
   loading: Boolean,
   closable: Boolean,
@@ -17,11 +17,11 @@ const props = defineProps({
 const emit = defineEmits(['close']);
 
 const colorClass = computed(() => {
-  return AlertConfig.colors[props.color || 'info'];
+  return AlertConfig.colors[props.color || 'primary'];
 });
 
 const icon = computed(() => {
-  return AlertConfig.iconNames[props.color || 'info'];
+  return AlertConfig.iconNames[props.color || 'primary'];
 });
 </script>
 

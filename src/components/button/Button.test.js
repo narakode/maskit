@@ -5,7 +5,7 @@ import ButtonConfig from './Button.config';
 import { Icon } from '@iconify/vue';
 import Spinner from '../spinner/Spinner.vue';
 
-describe.only('Button', () => {
+describe('Button', () => {
   test('should render text', () => {
     const wrapper = mount(Button, {
       slots: {

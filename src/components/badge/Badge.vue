@@ -6,9 +6,9 @@ import BadgeConfig from './Badge.config';
 const props = defineProps({
   color: {
     type: String,
-    default: 'info',
+    default: 'primary',
     validator: (val) =>
-      ['info', 'error', 'warning', 'success', 'secondary'].includes(val),
+      ['primary', 'error', 'warning', 'success', 'secondary'].includes(val),
   },
   icon: String,
 });

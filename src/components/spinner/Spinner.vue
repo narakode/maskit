@@ -6,9 +6,9 @@ import SpinnerConfig from './Spinner.config';
 const props = defineProps({
   color: {
     type: String,
-    default: 'info',
+    default: 'primary',
     validator: (value) =>
-      ['info', 'error', 'warning', 'success', 'secondary'].includes(value),
+      ['primary', 'error', 'warning', 'success', 'secondary'].includes(value),
   },
   size: {
     type: String,
