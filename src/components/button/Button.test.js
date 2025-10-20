@@ -232,4 +232,20 @@ describe.only('Button', () => {
       expect(wrapper.props('iconPosition')).toEqual('start');
     });
   });
+
+  test('should not disabled by default', () => {
+    const wrapper = mount(Button);
+
+    expect(wrapper.attributes('disabled')).toBeUndefined();
+  });
+
+  test('should disabled when disabled is true', () => {
+    const wrapper = mount(Button, {
+      props: {
+        disabled: true,
+      },
+    });
+
+    expect(wrapper.attributes('disabled')).toBeDefined();
+  });
 });

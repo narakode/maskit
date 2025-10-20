@@ -23,6 +23,7 @@ const props = defineProps({
   bordered: Boolean,
   transparent: Boolean,
   overrideColor: Boolean,
+  responsive: Boolean,
   size: {
     type: String,
     default: 'md',
@@ -35,15 +36,14 @@ const props = defineProps({
   },
   icon: String,
   iconOnly: Boolean,
-  type: String,
-  loading: Boolean,
-  disabled: Boolean,
-  responsive: Boolean,
   iconPosition: {
     type: String,
     default: 'start',
     validator: (value) => ['start', 'end'].includes(value),
   },
+  loading: Boolean,
+  disabled: Boolean,
+  type: String,
   tag: {
     default: 'button',
   },
