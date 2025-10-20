@@ -22,6 +22,18 @@ describe.only('Button', () => {
     );
   });
 
+  test('should have color class by color prop', () => {
+    const wrapper = mount(Button, {
+      props: {
+        color: 'error',
+      },
+    });
+
+    expect(wrapper.classes()).toEqual(
+      expect.arrayContaining(ButtonConfig.colors.error.split(' ')),
+    );
+  });
+
   test('should not have border class by default', () => {
     const wrapper = mount(Button);
 
@@ -46,29 +58,27 @@ describe.only('Button', () => {
     );
   });
 
-  describe('when color prop exists', () => {
-    test('should have color class', () => {
+  describe('when bordered is true', () => {
+    test('should have border class', () => {
       const wrapper = mount(Button, {
         props: {
-          color: 'error',
-        },
-      });
-
-      expect(wrapper.classes()).toEqual(
-        expect.arrayContaining(ButtonConfig.colors.error.split(' ')),
-      );
-    });
-
-    test('should have border color class when bordered is true', () => {
-      const wrapper = mount(Button, {
-        props: {
-          color: 'light',
           bordered: true,
         },
       });
 
+      expect(wrapper.classes()).toEqual(expect.arrayContaining(['border']));
+    });
+
+    test('should have border color class by color prop', () => {
+      const wrapper = mount(Button, {
+        props: {
+          bordered: true,
+          color: 'primary',
+        },
+      });
+
       expect(wrapper.classes()).toEqual(
-        expect.arrayContaining(ButtonConfig.borderColors.light.split(' ')),
+        expect.arrayContaining(ButtonConfig.borderColors.primary.split(' ')),
       );
     });
   });
@@ -98,5 +108,17 @@ describe.only('Button', () => {
         expect.arrayContaining(ButtonConfig.colors.primary.split(' ')),
       );
     });
+  });
+
+  test('should not have background class when override color is true', () => {
+    const wrapper = mount(Button, {
+      props: {
+        overrideColor: true,
+      },
+    });
+
+    expect(wrapper.classes()).not.toEqual(
+      expect.arrayContaining(ButtonConfig.colors.secondary.split(' ')),
+    );
   });
 });

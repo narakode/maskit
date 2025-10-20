@@ -22,6 +22,7 @@ const props = defineProps({
   },
   bordered: Boolean,
   transparent: Boolean,
+  overrideColor: Boolean,
   size: {
     type: String,
     default: 'md',
@@ -43,7 +44,6 @@ const props = defineProps({
     default: 'start',
     validator: (value) => ['start', 'end'].includes(value),
   },
-  overrideColor: Boolean,
   tag: {
     default: 'button',
   },
