@@ -221,5 +221,15 @@ describe.only('Button', () => {
         );
       });
     });
+
+    test('should have position left by default', () => {
+      const wrapper = mount(Button, {
+        props: {
+          icon: 'tabler:check',
+        },
+      });
+
+      expect(wrapper.props('iconPosition')).toEqual('start');
+    });
   });
 });
