@@ -80,6 +80,10 @@ const spinnerColor = computed(() => {
 });
 
 const sizeClass = computed(() => {
+  if (!props.iconOnly) {
+    return ButtonConfig.sizes.default[props.size || 'md'];
+  }
+
   const defaultSizes = {
     sm: ['h-8 text-sm', props.iconOnly ? 'w-8' : 'px-3'],
     md: ['h-10', props.iconOnly ? 'w-10' : 'px-4'],

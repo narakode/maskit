@@ -110,7 +110,7 @@ describe.only('Button', () => {
     });
   });
 
-  test('should not have background class when override color is true', () => {
+  test('should not have color class when override color is true', () => {
     const wrapper = mount(Button, {
       props: {
         overrideColor: true,
@@ -119,6 +119,26 @@ describe.only('Button', () => {
 
     expect(wrapper.classes()).not.toEqual(
       expect.arrayContaining(ButtonConfig.colors.secondary.split(' ')),
+    );
+  });
+
+  test('should have default size class', () => {
+    const wrapper = mount(Button);
+
+    expect(wrapper.classes()).toEqual(
+      expect.arrayContaining(ButtonConfig.sizes.default.md.split(' ')),
+    );
+  });
+
+  test('should have size class by size prop', () => {
+    const wrapper = mount(Button, {
+      props: {
+        size: 'lg',
+      },
+    });
+
+    expect(wrapper.classes()).toEqual(
+      expect.arrayContaining(ButtonConfig.sizes.default.lg.split(' ')),
     );
   });
 });
