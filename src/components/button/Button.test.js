@@ -154,4 +154,20 @@ describe.only('Button', () => {
       expect.arrayContaining(ButtonConfig.sizes.responsive.lg.split(' ')),
     );
   });
+
+  test('should not have width full class by default', () => {
+    const wrapper = mount(Button);
+
+    expect(wrapper.classes()).not.toEqual(expect.arrayContaining(['w-full']));
+  });
+
+  test('should have width full class when width is full', () => {
+    const wrapper = mount(Button, {
+      props: {
+        width: 'full',
+      },
+    });
+
+    expect(wrapper.classes()).toEqual(expect.arrayContaining(['w-full']));
+  });
 });
