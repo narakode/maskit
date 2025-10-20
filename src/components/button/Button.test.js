@@ -3,6 +3,7 @@ import { describe, expect, test } from 'vitest';
 import Button from './Button.vue';
 import ButtonConfig from './Button.config';
 import { Icon } from '@iconify/vue';
+import Spinner from '../spinner/Spinner.vue';
 
 describe.only('Button', () => {
   test('should render text', () => {
@@ -247,5 +248,36 @@ describe.only('Button', () => {
     });
 
     expect(wrapper.attributes('disabled')).toBeDefined();
+  });
+
+  test('should not render spinner by default', () => {
+    const wrapper = mount(Button);
+
+    expect(wrapper.findComponent(Spinner).exists()).toBe(false);
+  });
+
+  test('should disabled and render spinner when loading is true', () => {
+    const wrapper = mount(Button, {
+      props: {
+        loading: true,
+      },
+    });
+
+    expect(wrapper.attributes('disabled')).toBeDefined();
+
+    const spinner = wrapper.findComponent(Spinner);
+
+    expect(spinner.exists()).toBe(true);
+  });
+
+  test('should have spinner color by color prop', () => {
+    const wrapper = mount(Button, {
+      props: {
+        loading: true,
+        color: 'error',
+      },
+    });
+
+    expect(wrapper.findComponent(Spinner).props('color')).toEqual('error');
   });
 });

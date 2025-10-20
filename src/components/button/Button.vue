@@ -41,8 +41,8 @@ const props = defineProps({
     default: 'start',
     validator: (value) => ['start', 'end'].includes(value),
   },
-  loading: Boolean,
   disabled: Boolean,
+  loading: Boolean,
   type: String,
   tag: {
     default: 'button',
@@ -64,19 +64,6 @@ const colorClass = computed(() => {
       ? ['border', ButtonConfig.borderColors[props.color || 'secondary']]
       : '',
   ];
-});
-
-const spinnerColor = computed(() => {
-  return {
-    secondary: 'light',
-    primary: 'light-primary',
-    light: 'light',
-    warning: 'light-warning',
-    success: 'light-success',
-    error: 'light-error',
-    transparent: 'light',
-    bordered: 'light',
-  }[props.color || 'secondary'];
 });
 
 const sizeClass = computed(() => {
@@ -104,7 +91,7 @@ const sizeClass = computed(() => {
       width === 'full' ? 'w-full' : '',
     ]"
   >
-    <Spinner v-if="loading" :color="spinnerColor" />
+    <Spinner v-if="loading" :color="color" />
     <Icon v-if="!loading && icon && iconPosition === 'start'" :icon="icon" />
     <slot v-if="!iconOnly" />
     <Icon v-if="!loading && icon && iconPosition === 'end'" :icon="icon" />
