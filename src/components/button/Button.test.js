@@ -280,4 +280,20 @@ describe.only('Button', () => {
 
     expect(wrapper.findComponent(Spinner).props('color')).toEqual('error');
   });
+
+  test('should render tagname as button by default', () => {
+    const wrapper = mount(Button);
+
+    expect(wrapper.element.tagName).toEqual('BUTTON');
+  });
+
+  test('should render tagname by tag prop', () => {
+    const wrapper = mount(Button, {
+      props: {
+        tag: 'a',
+      },
+    });
+
+    expect(wrapper.element.tagName).toEqual('A');
+  });
 });

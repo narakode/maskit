@@ -43,10 +43,10 @@ const props = defineProps({
   },
   disabled: Boolean,
   loading: Boolean,
-  type: String,
   tag: {
     default: 'button',
   },
+  type: String,
 });
 
 const colorClass = computed(() => {
