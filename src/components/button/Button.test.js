@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
 import Button from './Button.vue';
 import ButtonConfig from './Button.config';
+import { Icon } from '@iconify/vue';
 
 describe.only('Button', () => {
   test('should render text', () => {
@@ -169,5 +170,26 @@ describe.only('Button', () => {
     });
 
     expect(wrapper.classes()).toEqual(expect.arrayContaining(['w-full']));
+  });
+
+  test('should not render icon by default', () => {
+    const wrapper = mount(Button);
+
+    expect(wrapper.findComponent(Icon).exists()).toBe(false);
+  });
+
+  describe('when icon is exists', () => {
+    test('should render icon by name', () => {
+      const wrapper = mount(Button, {
+        props: {
+          icon: 'tabler:check',
+        },
+      });
+
+      const icon = wrapper.findComponent(Icon);
+
+      expect(icon.exists()).toBe(true);
+      expect(icon.props('icon')).toEqual('tabler:check');
+    });
   });
 });
