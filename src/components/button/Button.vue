@@ -33,11 +33,11 @@ const props = defineProps({
     default: 'auto',
     validator: (value) => ['auto', 'full'].includes(value),
   },
-  type: String,
   icon: String,
+  iconOnly: Boolean,
+  type: String,
   loading: Boolean,
   disabled: Boolean,
-  iconOnly: Boolean,
   responsive: Boolean,
   iconPosition: {
     type: String,
@@ -81,32 +81,14 @@ const spinnerColor = computed(() => {
 
 const sizeClass = computed(() => {
   if (props.responsive) {
-    return ButtonConfig.sizes.responsive[props.size || 'md'];
+    return ButtonConfig.sizes[
+      props.iconOnly ? 'iconOnlyResponsive' : 'responsive'
+    ][props.size || 'md'];
   }
 
-  if (!props.iconOnly) {
-    return ButtonConfig.sizes.default[props.size || 'md'];
-  }
-
-  const defaultSizes = {
-    sm: ['h-8 text-sm', props.iconOnly ? 'w-8' : 'px-3'],
-    md: ['h-10', props.iconOnly ? 'w-10' : 'px-4'],
-    lg: ['h-12 text-lg', props.iconOnly ? 'w-12' : 'px-5'],
-  };
-  const responsiveSizes = {
-    sm: defaultSizes.sm,
-    md: ['h-8 px-3 text-sm lg:px-4 lg:h-10 lg:text-base'],
-    lg: [
-      'h-10 xl:h-12 xl:text-lg',
-      props.iconOnly ? 'w-10 xl:w-12' : 'px-4 xl:px-5',
-    ],
-  };
-
-  if (props.responsive) {
-    return responsiveSizes[props.size || 'md'];
-  }
-
-  return defaultSizes[props.size || 'md'];
+  return ButtonConfig.sizes[props.iconOnly ? 'iconOnly' : 'default'][
+    props.size || 'md'
+  ];
 });
 </script>
 

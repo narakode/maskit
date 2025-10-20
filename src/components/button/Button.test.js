@@ -191,5 +191,35 @@ describe.only('Button', () => {
       expect(icon.exists()).toBe(true);
       expect(icon.props('icon')).toEqual('tabler:check');
     });
+
+    describe('when icon only is true', () => {
+      test('should have icon only size class', () => {
+        const wrapper = mount(Button, {
+          props: {
+            icon: 'tabler:check',
+            iconOnly: true,
+          },
+        });
+
+        expect(wrapper.classes()).toEqual(
+          expect.arrayContaining(ButtonConfig.sizes.iconOnly.md.split(' ')),
+        );
+      });
+      test('should have icon only responsive size class when responsive is true', () => {
+        const wrapper = mount(Button, {
+          props: {
+            icon: 'tabler:check',
+            iconOnly: true,
+            responsive: true,
+          },
+        });
+
+        expect(wrapper.classes()).toEqual(
+          expect.arrayContaining(
+            ButtonConfig.sizes.iconOnlyResponsive.md.split(' '),
+          ),
+        );
+      });
+    });
   });
 });

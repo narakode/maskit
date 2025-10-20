@@ -3,6 +3,11 @@ const defaultSize = {
   md: 'h-10 px-4',
   lg: 'h-12 px-5 text-lg',
 };
+const iconOnlySize = {
+  sm: 'h-8 w-8 text-sm',
+  md: 'h-10 w-10',
+  lg: 'h-12 w-12 text-lg',
+};
 
 export default {
   colors: {
@@ -27,6 +32,12 @@ export default {
       sm: defaultSize.sm,
       md: `${defaultSize.sm} sm:h-10 sm:px-4`,
       lg: `${defaultSize.sm} sm:h-12 sm:px-5 sm:text-lg`,
+    },
+    iconOnly: iconOnlySize,
+    iconOnlyResponsive: {
+      sm: iconOnlySize.sm,
+      md: `${iconOnlySize.sm} sm:h-10 sm:w-10`,
+      lg: `${iconOnlySize.sm} sm:h-12 sm:w-12 sm:text-lg`,
     },
   },
 };
