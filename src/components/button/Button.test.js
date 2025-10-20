@@ -141,4 +141,17 @@ describe.only('Button', () => {
       expect.arrayContaining(ButtonConfig.sizes.default.lg.split(' ')),
     );
   });
+
+  test('should have size responsive class when responsive is true', () => {
+    const wrapper = mount(Button, {
+      props: {
+        size: 'lg',
+        responsive: true,
+      },
+    });
+
+    expect(wrapper.classes()).toEqual(
+      expect.arrayContaining(ButtonConfig.sizes.responsive.lg.split(' ')),
+    );
+  });
 });

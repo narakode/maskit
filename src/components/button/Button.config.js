@@ -1,3 +1,9 @@
+const defaultSize = {
+  sm: 'h-8 px-3 text-sm',
+  md: 'h-10 px-4',
+  lg: 'h-12 px-5 text-lg',
+};
+
 export default {
   colors: {
     secondary: 'bg-gray-100 text-gray-900 hover:bg-gray-200',
@@ -16,10 +22,11 @@ export default {
     error: 'border-red-600 hover:border-red-700',
   },
   sizes: {
-    default: {
-      sm: 'h-8 px-3 text-sm',
-      md: 'h-10 px-4',
-      lg: 'h-12 px-5 text-lg',
+    default: defaultSize,
+    responsive: {
+      sm: defaultSize.sm,
+      md: `${defaultSize.sm} sm:h-10 sm:px-4`,
+      lg: `${defaultSize.sm} sm:h-12 sm:px-5 sm:text-lg`,
     },
   },
 };
