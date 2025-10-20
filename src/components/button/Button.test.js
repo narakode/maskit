@@ -21,4 +21,16 @@ describe.only('Button', () => {
       expect.arrayContaining(ButtonConfig.colors.secondary.split(' ')),
     );
   });
+
+  test('should have color class by color prop', () => {
+    const wrapper = mount(Button, {
+      props: {
+        color: 'error',
+      },
+    });
+
+    expect(wrapper.classes()).toEqual(
+      expect.arrayContaining(ButtonConfig.colors.error.split(' ')),
+    );
+  });
 });
