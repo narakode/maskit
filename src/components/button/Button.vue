@@ -21,6 +21,7 @@ const props = defineProps({
       ].includes(value),
   },
   bordered: Boolean,
+  transparent: Boolean,
   size: {
     type: String,
     default: 'md',
@@ -52,6 +53,11 @@ const colorClass = computed(() => {
   if (props.overrideColor) {
     return '';
   }
+
+  if (props.transparent) {
+    return 'bg-transparent';
+  }
+
   return [
     ButtonConfig.colors[props.color || 'secondary'],
     props.bordered
