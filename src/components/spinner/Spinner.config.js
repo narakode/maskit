@@ -9,5 +9,10 @@ export default {
     error: 'text-red-600',
     success: 'text-green-600',
     secondary: 'text-gray-700',
+    light: 'text-white',
+    'light-primary': 'text-blue-100',
+    'light-warning': 'text-yellow-100',
+    'light-error': 'text-red-100',
+    'light-success': 'text-green-100',
   },
 };

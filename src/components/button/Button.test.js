@@ -20,7 +20,7 @@ describe('Button', () => {
     const wrapper = mount(Button);
 
     expect(wrapper.classes()).toEqual(
-      expect.arrayContaining(ButtonConfig.colors.secondary.split(' ')),
+      expect.arrayContaining(ButtonConfig.colors.default.secondary.split(' ')),
     );
   });
 
@@ -32,7 +32,7 @@ describe('Button', () => {
     });
 
     expect(wrapper.classes()).toEqual(
-      expect.arrayContaining(ButtonConfig.colors.error.split(' ')),
+      expect.arrayContaining(ButtonConfig.colors.default.error.split(' ')),
     );
   });
 
@@ -80,7 +80,9 @@ describe('Button', () => {
       });
 
       expect(wrapper.classes()).toEqual(
-        expect.arrayContaining(ButtonConfig.borderColors.primary.split(' ')),
+        expect.arrayContaining(
+          ButtonConfig.borderColors.default.primary.split(' '),
+        ),
       );
     });
   });
@@ -98,7 +100,7 @@ describe('Button', () => {
       );
     });
 
-    test('should not have color class', () => {
+    test('should have color transparent class', () => {
       const wrapper = mount(Button, {
         props: {
           transparent: true,
@@ -106,8 +108,26 @@ describe('Button', () => {
         },
       });
 
-      expect(wrapper.classes()).not.toEqual(
-        expect.arrayContaining(ButtonConfig.colors.primary.split(' ')),
+      expect(wrapper.classes()).toEqual(
+        expect.arrayContaining(
+          ButtonConfig.colors.transparent.primary.split(' '),
+        ),
+      );
+    });
+
+    test('should have color transparent class and border transparent', () => {
+      const wrapper = mount(Button, {
+        props: {
+          transparent: true,
+          color: 'primary',
+          bordered: true,
+        },
+      });
+
+      expect(wrapper.classes()).toEqual(
+        expect.arrayContaining(
+          ButtonConfig.borderColors.transparent.primary.split(' '),
+        ),
       );
     });
   });
@@ -120,7 +140,7 @@ describe('Button', () => {
     });
 
     expect(wrapper.classes()).not.toEqual(
-      expect.arrayContaining(ButtonConfig.colors.secondary.split(' ')),
+      expect.arrayContaining(ButtonConfig.colors.default.secondary.split(' ')),
     );
   });
 
@@ -278,7 +298,9 @@ describe('Button', () => {
       },
     });
 
-    expect(wrapper.findComponent(Spinner).props('color')).toEqual('error');
+    expect(wrapper.findComponent(Spinner).props('color')).toEqual(
+      ButtonConfig.spinnerColors.error,
+    );
   });
 
   test('should render tagname as button by default', () => {

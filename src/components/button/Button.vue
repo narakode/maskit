@@ -54,13 +54,25 @@ const colorClass = computed(() => {
   }
 
   if (props.transparent) {
-    return 'bg-transparent';
+    return [
+      'bg-transparent',
+      ButtonConfig.colors.transparent[props.color || 'secondary'],
+      props.bordered
+        ? [
+            'border',
+            ButtonConfig.borderColors.transparent[props.color || 'secondary'],
+          ]
+        : null,
+    ];
   }
 
   return [
-    ButtonConfig.colors[props.color || 'secondary'],
+    ButtonConfig.colors.default[props.color || 'secondary'],
     props.bordered
-      ? ['border', ButtonConfig.borderColors[props.color || 'secondary']]
+      ? [
+          'border',
+          ButtonConfig.borderColors.default[props.color || 'secondary'],
+        ]
       : '',
   ];
 });
@@ -89,7 +101,10 @@ const sizeClass = computed(() => {
       width === 'full' ? 'w-full' : '',
     ]"
   >
-    <Spinner v-if="loading" :color="color" />
+    <Spinner
+      v-if="loading"
+      :color="ButtonConfig.spinnerColors[color || 'secondary']"
+    />
     <Icon v-if="!loading && icon && iconPosition === 'start'" :icon="icon" />
     <slot v-if="!iconOnly" />
     <Icon v-if="!loading && icon && iconPosition === 'end'" :icon="icon" />
