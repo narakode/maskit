@@ -19,9 +19,9 @@ export default defineConfig({
         text: 'Components',
         items: [
           { text: 'Alert', link: '/components/alert' },
-          { text: 'Spinner', link: '/components/spinner' },
           { text: 'Badge', link: '/components/badge' },
           { text: 'Button', link: '/components/button' },
+          { text: 'Spinner', link: '/components/spinner' },
         ],
       },
     ],
