@@ -19,7 +19,7 @@ describe('Badge', () => {
     const wrapper = mount(Badge);
 
     expect(wrapper.classes()).toEqual(
-      expect.arrayContaining(BadgeConfig.colors.info.split(' ')),
+      expect.arrayContaining(BadgeConfig.colors.primary.split(' ')),
     );
   });
 

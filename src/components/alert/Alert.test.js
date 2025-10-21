@@ -22,14 +22,14 @@ describe('Alert', () => {
     const icon = wrapper.findComponent(Icon);
 
     expect(icon.exists()).toBe(true);
-    expect(icon.props('icon')).toEqual(AlertConfig.iconNames.info);
+    expect(icon.props('icon')).toEqual(AlertConfig.iconNames.primary);
   });
 
   test('should have default color class', () => {
     const wrapper = mount(Alert);
 
     expect(wrapper.classes()).toEqual(
-      expect.arrayContaining(AlertConfig.colors.info.split(' ')),
+      expect.arrayContaining(AlertConfig.colors.primary.split(' ')),
     );
   });
 
@@ -75,7 +75,7 @@ describe('Alert', () => {
     const loadingSpinner = wrapper.findComponent(Spinner);
 
     expect(loadingSpinner.exists()).toBe(true);
-    expect(loadingSpinner.props('color')).toEqual('info');
+    expect(loadingSpinner.props('color')).toEqual('primary');
   });
 
   test('should render loading spinner color by color props', () => {

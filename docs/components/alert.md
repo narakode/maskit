@@ -20,10 +20,10 @@ Alert adalah komponen untuk menampilkan pesan notifikasi, informasi, dsb.
 
 ## Warna
 
-Alert bisa diatur warnanya dengan props `color`, nilainya bisa `info`, `error`, `warning`, `success` dan `secondary`. Defaultnya `info`.
+Alert bisa diatur warnanya dengan props `color`, nilainya bisa `primary`, `error`, `warning`, `success` dan `secondary`. Defaultnya `primary`.
 
 ```vue
-<Alert color="info">Info</Alert>
+<Alert color="primary">Primary</Alert>
 <Alert color="error">Error</Alert>
 <Alert color="warning">Warning</Alert>
 <Alert color="success">Success</Alert>
@@ -33,7 +33,7 @@ Alert bisa diatur warnanya dengan props `color`, nilainya bisa `info`, `error`, 
 ::: raw
 
 <div class="space-y-4">
-<Alert color="info">Info</Alert>
+<Alert color="primary">Primary</Alert>
 <Alert color="error">Error</Alert>
 <Alert color="warning">Warning</Alert>
 <Alert color="success">Success</Alert>
@@ -69,11 +69,11 @@ Alert bisa diberikan tombol close di ujung dengan props `closable`, nilainya boo
 
 ## Props
 
-| Nama       | Type                                                       | Wajib? | Default | Fungsi                      |
-| ---------- | ---------------------------------------------------------- | ------ | ------- | --------------------------- |
-| `color`    | `enum('info', 'error', 'warning', 'success', 'secondary')` | :x:    | `info`  | Mengatur warna              |
-| `loading`  | `boolean`                                                  | :x:    | `false` | Menampilkan loading spinner |
-| `closable` | `boolean`                                                  | :x:    | `false` | Menampilkan tombol close    |
+| Nama       | Type                                                          | Wajib? | Default   | Fungsi                      |
+| ---------- | ------------------------------------------------------------- | ------ | --------- | --------------------------- |
+| `color`    | `enum('primary', 'error', 'warning', 'success', 'secondary')` | :x:    | `primary` | Mengatur warna              |
+| `loading`  | `boolean`                                                     | :x:    | `false`   | Menampilkan loading spinner |
+| `closable` | `boolean`                                                     | :x:    | `false`   | Menampilkan tombol close    |
 
 ## Events
 
