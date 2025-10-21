@@ -40,6 +40,26 @@ Spinner bisa diatur warnanya dengan props `color`, nilainya bisa `primary`, `err
 <Spinner color="secondary" />
 :::
 
+### Versi Terang
+
+Warna bisa diubah menjadi terang dengan menambahkan `light-` pada props `color`.
+
+```vue
+<Spinner color="light-primary" />
+<Spinner color="light-error" />
+<Spinner color="light-warning" />
+<Spinner color="light-success" />
+<Spinner color="light-secondary" />
+```
+
+::: raw
+<Spinner color="light-primary" />
+<Spinner color="light-error" />
+<Spinner color="light-warning" />
+<Spinner color="light-success" />
+<Spinner color="light-secondary" />
+:::
+
 ## Ukuran
 
 Spinner bisa diatur ukurannya dengan props `size`, nilainya bisa `md` (sedang) dan `lg` (besar). Defaultnya `md`.
@@ -66,7 +86,8 @@ Atau bisa juga dioverride dengan menambahkan class ke component, misalnya `w-20 
 
 ## Props
 
-| Nama    | Type                                                          | Wajib? | Default   | Fungsi          |
-| ------- | ------------------------------------------------------------- | ------ | --------- | --------------- |
-| `color` | `enum('primary', 'error', 'warning', 'success', 'secondary')` | :x:    | `primary` | Mengatur warna  |
-| `size`  | `enum('md', 'lg')`                                            | :x:    | `md`      | Mengatur ukuran |
+| Nama    | Type                                                                                        | Wajib? | Default   | Fungsi                      |
+| ------- | ------------------------------------------------------------------------------------------- | ------ | --------- | --------------------------- |
+| `color` | `enum('primary', 'error', 'warning', 'success', 'secondary')`                               | :x:    | `primary` | Mengatur warna              |
+| `color` | `enum('light-primary', 'light-error', 'light-warning', 'light-success', 'light-secondary')` | :x:    | `primary` | Mengatur warna versi terang |
+| `size`  | `enum('md', 'lg')`                                                                          | :x:    | `md`      | Mengatur ukuran             |
