@@ -7,10 +7,10 @@ export default {
     secondary: 'bg-gray-100 border-gray-300 text-gray-600',
   },
   iconNames: {
-    primary: 'tabler:primary-circle-filled',
+    primary: 'tabler:info-circle-filled',
     error: 'tabler:alert-circle-filled',
     warning: 'tabler:alert-circle-filled',
     success: 'tabler:circle-check-filled',
-    secondary: 'tabler:primary-circle-filled',
+    secondary: 'tabler:info-circle-filled',
   },
 };

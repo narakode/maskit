@@ -1,23 +1,24 @@
 ---
-title: Badge
+title: Button
 ---
 
 <script setup>
 import Badge from '../../src/components/badge/Badge.vue'
+import Button from '../../src/components/button/Button.vue'
 </script>
 
-# Badge
+# Button
 
-Badge adalah komponen untuk menampilkan teks kecil dengan background warna. Misalnya untuk menampilkan teks status.
+Button adalah komponen untuk menampilkan tombol dengan variasi warna, ukuran dan icon.
 
 ## Contoh
 
 ```vue
-<Badge>Pesanan Diproses</Badge>
+<Button>Simpan</Button>
 ```
 
 ::: raw
-<Badge>Pesanan Diproses</Badge>
+<Button>Simpan</Button>
 :::
 
 ## Icon
