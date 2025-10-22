@@ -3,7 +3,6 @@ title: Button
 ---
 
 <script setup>
-import Badge from '../../src/components/badge/Badge.vue'
 import Button from '../../src/components/button/Button.vue'
 </script>
 

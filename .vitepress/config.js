@@ -21,6 +21,7 @@ export default defineConfig({
           { text: 'Alert', link: '/components/alert' },
           { text: 'Badge', link: '/components/badge' },
           { text: 'Button', link: '/components/button' },
+          { text: 'Card', link: '/components/card' },
           { text: 'Spinner', link: '/components/spinner' },
         ],
       },

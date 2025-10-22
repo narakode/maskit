@@ -8,7 +8,18 @@ const props = defineProps({
     type: String,
     default: 'primary',
     validator: (value) =>
-      ['primary', 'error', 'warning', 'success', 'secondary'].includes(value),
+      [
+        'primary',
+        'error',
+        'warning',
+        'success',
+        'secondary',
+        'light',
+        'light-primary',
+        'light-error',
+        'light-warning',
+        'light-success',
+      ].includes(value),
   },
   size: {
     type: String,
