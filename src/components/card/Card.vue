@@ -31,6 +31,7 @@ defineProps({
       hasShadow ? 'shadow-md' : '',
       rounded ? 'rounded-md' : '',
       dimmed ? 'bg-gray-100' : 'bg-white',
+      'text-gray-900',
     ]"
   >
     <div

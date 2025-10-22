@@ -11,6 +11,12 @@ describe('Card', () => {
     expect(els).toHaveLength(2);
   });
 
+  test('should have base class by default', () => {
+    const wrapper = mount(Card);
+
+    expect(wrapper.classes()).toContain('text-gray-900');
+  });
+
   test('should have border class by default', () => {
     const wrapper = mount(Card);
 
