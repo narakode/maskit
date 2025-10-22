@@ -3,7 +3,6 @@ title: Badge
 ---
 
 <script setup>
-import Spinner from '../../src/components/spinner/Spinner.vue'
 import Badge from '../../src/components/badge/Badge.vue'
 </script>
 

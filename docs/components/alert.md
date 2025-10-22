@@ -51,7 +51,7 @@ Alert bisa diberikan loading spinner dengan props `loading`, nilainya boolean. D
 
 ::: raw
 <Alert loading>Loading</Alert>
-::: raw
+:::
 
 ## Tombol Close
 
@@ -65,7 +65,7 @@ Alert bisa diberikan tombol close di ujung dengan props `closable`, nilainya boo
 
 ::: raw
 <Alert closable @close="console.log('close alert')">Alert dapat diclose</Alert>
-::: raw
+:::
 
 ## Props
 
