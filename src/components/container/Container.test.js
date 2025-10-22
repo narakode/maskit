@@ -39,4 +39,14 @@ describe.only('Container', () => {
       ),
     );
   });
+
+  test('should render tag name by tag prop', () => {
+    const wrapper = mount(Container, {
+      props: {
+        tag: 'main',
+      },
+    });
+
+    expect(wrapper.element.tagName).toEqual('MAIN');
+  });
 });

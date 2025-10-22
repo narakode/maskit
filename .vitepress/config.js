@@ -22,6 +22,7 @@ export default defineConfig({
           { text: 'Badge', link: '/components/badge' },
           { text: 'Button', link: '/components/button' },
           { text: 'Card', link: '/components/card' },
+          { text: 'Container', link: '/components/container' },
           { text: 'Spinner', link: '/components/spinner' },
         ],
       },
