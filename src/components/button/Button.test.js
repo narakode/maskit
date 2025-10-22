@@ -39,7 +39,7 @@ describe('Button', () => {
   test('should not have border class by default', () => {
     const wrapper = mount(Button);
 
-    expect(wrapper.classes()).not.toEqual(expect.arrayContaining(['border']));
+    expect(wrapper.classes()).not.toContain('border');
   });
 
   test('should have border class when bordered is true', () => {
@@ -49,15 +49,13 @@ describe('Button', () => {
       },
     });
 
-    expect(wrapper.classes()).toEqual(expect.arrayContaining(['border']));
+    expect(wrapper.classes()).toContain('border');
   });
 
   test('should not have transparent class by default', () => {
     const wrapper = mount(Button);
 
-    expect(wrapper.classes()).not.toEqual(
-      expect.arrayContaining(['bg-transparent']),
-    );
+    expect(wrapper.classes()).not.toContain('bg-transparent');
   });
 
   describe('when bordered is true', () => {
@@ -68,7 +66,7 @@ describe('Button', () => {
         },
       });
 
-      expect(wrapper.classes()).toEqual(expect.arrayContaining(['border']));
+      expect(wrapper.classes()).toContain('border');
     });
 
     test('should have border color class by color prop', () => {
@@ -95,9 +93,7 @@ describe('Button', () => {
         },
       });
 
-      expect(wrapper.classes()).toEqual(
-        expect.arrayContaining(['bg-transparent']),
-      );
+      expect(wrapper.classes()).toContain('bg-transparent');
     });
 
     test('should have color transparent class', () => {
@@ -180,7 +176,7 @@ describe('Button', () => {
   test('should not have width full class by default', () => {
     const wrapper = mount(Button);
 
-    expect(wrapper.classes()).not.toEqual(expect.arrayContaining(['w-full']));
+    expect(wrapper.classes()).not.toContain('w-full');
   });
 
   test('should have width full class when width is full', () => {
@@ -190,7 +186,7 @@ describe('Button', () => {
       },
     });
 
-    expect(wrapper.classes()).toEqual(expect.arrayContaining(['w-full']));
+    expect(wrapper.classes()).toContain('w-full');
   });
 
   test('should not render icon by default', () => {
