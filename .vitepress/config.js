@@ -23,6 +23,7 @@ export default defineConfig({
           { text: 'Button', link: '/components/button' },
           { text: 'Card', link: '/components/card' },
           { text: 'Container', link: '/components/container' },
+          { text: 'Description List', link: '/components/description-list' },
           { text: 'Spinner', link: '/components/spinner' },
         ],
       },

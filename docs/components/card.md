@@ -193,8 +193,8 @@ Dimmed adalah cara styling card menjadi berwarna lebih gelap, dibuat dengan mena
 
 ## Slots
 
-| Nama     | Payload | Fungsi                                     |
-| -------- | ------- | ------------------------------------------ |
-| `body`   | `-`     | Menampilkan konten utama card              |
-| `action` | `-`     | Menampilkan konten di sebelah kanan header |
-| `fooder` | `-`     | Menampilkan konten di bagian bawah card    |
+| Nama      | Payload | Fungsi                                     |
+| --------- | ------- | ------------------------------------------ |
+| `default` | `-`     | Menampilkan konten utama card              |
+| `action`  | `-`     | Menampilkan konten di sebelah kanan header |
+| `fooder`  | `-`     | Menampilkan konten di bagian bawah card    |
