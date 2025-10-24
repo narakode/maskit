@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 import Container from './Container.vue';
 import ContainerConfig from './Container.config';
 
-describe.only('Container', () => {
+describe('Container', () => {
   test('should render as div', () => {
     const wrapper = mount(Container);
 
