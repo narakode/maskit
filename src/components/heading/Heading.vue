@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue';
+import HeadingConfig from './Heading.config';
 
 const props = defineProps({
   title: {
@@ -15,16 +16,7 @@ const props = defineProps({
 
 const tagName = computed(() => 'h' + props.level);
 const titleSize = computed(() => {
-  const sizes = {
-    1: 'text-5xl',
-    2: 'text-4xl',
-    3: 'text-3xl',
-    4: 'text-2xl',
-    5: 'text-xl',
-    6: 'text-lg',
-  };
-
-  return sizes[props.level] || 'text-base';
+  return HeadingConfig.sizes[props.level] || 'text-base';
 });
 </script>
 

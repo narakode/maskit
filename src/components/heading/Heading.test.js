@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
 import Heading from './Heading.vue';
+import HeadingConfig from './Heading.config';
 
 describe('Heading', () => {
   test('should render title', () => {
@@ -25,6 +26,19 @@ describe('Heading', () => {
     });
 
     expect(wrapper.find('h3').exists()).toBe(true);
+  });
+
+  test('should render heading level class by level prop', () => {
+    const wrapper = mount(Heading, {
+      props: {
+        title: 'Test',
+        level: 3,
+      },
+    });
+
+    expect(wrapper.find('h3').classes()).toEqual(
+      expect.arrayContaining(HeadingConfig.sizes[3].split(' ')),
+    );
   });
 
   test('should render action', () => {
