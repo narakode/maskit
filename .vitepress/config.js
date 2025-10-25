@@ -24,6 +24,7 @@ export default defineConfig({
           { text: 'Card', link: '/components/card' },
           { text: 'Container', link: '/components/container' },
           { text: 'Description List', link: '/components/description-list' },
+          { text: 'Skeleton', link: '/components/skeleton' },
           { text: 'Spinner', link: '/components/spinner' },
         ],
       },
