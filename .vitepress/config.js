@@ -25,6 +25,7 @@ export default defineConfig({
           { text: 'Container', link: '/components/container' },
           { text: 'Description List', link: '/components/description-list' },
           { text: 'Heading', link: '/components/heading' },
+          { text: 'Skeleton', link: '/components/skeleton' },
           { text: 'Spinner', link: '/components/spinner' },
         ],
       },
