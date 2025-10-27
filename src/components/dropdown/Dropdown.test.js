@@ -285,4 +285,68 @@ describe.only('Dropdown', () => {
       );
     });
   });
+
+  test('should have default content class', async () => {
+    const options = [
+      { id: 1, name: 'Test 1' },
+      { id: 2, name: 'Test 2' },
+      { id: 3, name: 'Test 3' },
+    ];
+
+    const dropdown = mount(Dropdown, {
+      props: {
+        options,
+      },
+      global: {
+        plugins: [MotionPlugin, vClickOutside],
+      },
+      slots: {
+        trigger: `<template #trigger="{toggle}">
+                        <button @click="toggle">Toggle</button>
+                    </template>`,
+      },
+    });
+
+    const button = dropdown.find('button');
+
+    await button.trigger('click');
+
+    const [, content] = dropdown.findAll('div');
+
+    expect(content.classes()).toEqual(
+      expect.arrayContaining(DropdownConfig.classes.content.split(' ')),
+    );
+    expect(content.classes()).toContain('min-w-40');
+  });
+
+  test('should not have min width class when override width prop is true', async () => {
+    const options = [
+      { id: 1, name: 'Test 1' },
+      { id: 2, name: 'Test 2' },
+      { id: 3, name: 'Test 3' },
+    ];
+
+    const dropdown = mount(Dropdown, {
+      props: {
+        options,
+        overrideWidth: true,
+      },
+      global: {
+        plugins: [MotionPlugin, vClickOutside],
+      },
+      slots: {
+        trigger: `<template #trigger="{toggle}">
+                        <button @click="toggle">Toggle</button>
+                    </template>`,
+      },
+    });
+
+    const button = dropdown.find('button');
+
+    await button.trigger('click');
+
+    const [, content] = dropdown.findAll('div');
+
+    expect(content.classes()).not.toContain('min-w-40');
+  });
 });

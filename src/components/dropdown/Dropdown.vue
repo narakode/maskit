@@ -18,7 +18,7 @@ const visible = ref(false);
 const classes = computed(() => {
   return {
     content: [
-      'absolute top-8 right-0 w-fit bg-white rounded-md border z-10 border-gray-300',
+      DropdownConfig.classes.content,
       props.overrideWidth ? '' : 'min-w-40',
       props.customClass.content,
     ],
