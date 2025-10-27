@@ -22,7 +22,7 @@ const classes = computed(() => {
       props.overrideWidth ? '' : 'min-w-40',
       props.customClass.content,
     ],
-    header: 'px-3 py-2 border-b border-gray-300',
+    header: DropdownConfig.classes.header,
     option: DropdownConfig.classes.option,
   };
 });

@@ -73,43 +73,43 @@ describe.only('Dropdown', () => {
     expect(dropdown.find('.py-1').exists()).toBe(true);
   });
 
-  test('should render option slot when dropdown is openend', async () => {
-    const options = [
-      { id: 1, name: 'Test 1' },
-      { id: 2, name: 'Test 2' },
-      { id: 3, name: 'Test 3' },
-    ];
+  describe('when option slot exists', () => {
+    test('should render content', async () => {
+      const options = [
+        { id: 1, name: 'Test 1' },
+        { id: 2, name: 'Test 2' },
+        { id: 3, name: 'Test 3' },
+      ];
 
-    const dropdown = mount(Dropdown, {
-      props: {
-        options,
-      },
-      global: {
-        plugins: [MotionPlugin, vClickOutside],
-      },
-      slots: {
-        trigger: `<template #trigger="{toggle}">
-                    <button @click="toggle">Toggle</button>
-                </template>`,
-        option: `<template #option><div class="option">Test</div></template>`,
-      },
+      const dropdown = mount(Dropdown, {
+        props: {
+          options,
+        },
+        global: {
+          plugins: [MotionPlugin, vClickOutside],
+        },
+        slots: {
+          trigger: `<template #trigger="{toggle}">
+                      <button @click="toggle">Toggle</button>
+                  </template>`,
+          option: `<template #option><div class="option">Test</div></template>`,
+        },
+      });
+
+      const button = dropdown.find('button');
+
+      await button.trigger('click');
+
+      const dropdownListOptions = dropdown.findAll('.option');
+
+      expect(dropdownListOptions).toHaveLength(3);
+      expect(dropdownListOptions.map((option) => option.text())).toEqual([
+        'Test',
+        'Test',
+        'Test',
+      ]);
     });
 
-    const button = dropdown.find('button');
-
-    await button.trigger('click');
-
-    const dropdownListOptions = dropdown.findAll('.option');
-
-    expect(dropdownListOptions).toHaveLength(3);
-    expect(dropdownListOptions.map((option) => option.text())).toEqual([
-      'Test',
-      'Test',
-      'Test',
-    ]);
-  });
-
-  describe('Option Slot', () => {
     test('should have option and classes payload', async () => {
       const options = [
         { id: 1, name: 'Test 1' },
@@ -151,40 +151,40 @@ describe.only('Dropdown', () => {
     });
   });
 
-  test('should not render option list when default slot is exists', async () => {
-    const options = [
-      { id: 1, name: 'Test 1' },
-      { id: 2, name: 'Test 2' },
-      { id: 3, name: 'Test 3' },
-    ];
+  describe('when default slot exists', () => {
+    test('should not render option slot', async () => {
+      const options = [
+        { id: 1, name: 'Test 1' },
+        { id: 2, name: 'Test 2' },
+        { id: 3, name: 'Test 3' },
+      ];
 
-    const dropdown = mount(Dropdown, {
-      props: {
-        options,
-      },
-      global: {
-        plugins: [MotionPlugin, vClickOutside],
-      },
-      slots: {
-        trigger: `<template #trigger="{toggle}">
-                      <button @click="toggle">Toggle</button>
-                  </template>`,
-        option: `<template #option="{ option, classes }">
-                      <div :class="['option', classes.option]">{{ option.id }} - {{ option.name }}</div>
-                  </template>`,
-        default: `<div class="default-slot"></div>`,
-      },
+      const dropdown = mount(Dropdown, {
+        props: {
+          options,
+        },
+        global: {
+          plugins: [MotionPlugin, vClickOutside],
+        },
+        slots: {
+          trigger: `<template #trigger="{toggle}">
+                        <button @click="toggle">Toggle</button>
+                    </template>`,
+          option: `<template #option="{ option, classes }">
+                        <div :class="['option', classes.option]">{{ option.id }} - {{ option.name }}</div>
+                    </template>`,
+          default: `<div class="default-slot"></div>`,
+        },
+      });
+
+      const button = dropdown.find('button');
+
+      await button.trigger('click');
+
+      expect(dropdown.find('.option').exists()).toBe(false);
+      expect(dropdown.find('.default-slot').exists()).toBe(true);
     });
 
-    const button = dropdown.find('button');
-
-    await button.trigger('click');
-
-    expect(dropdown.find('.option').exists()).toBe(false);
-    expect(dropdown.find('.default-slot').exists()).toBe(true);
-  });
-
-  describe('Default Slot', () => {
     test('should have classes payload', async () => {
       const options = [
         { id: 1, name: 'Test 1' },
@@ -218,6 +218,70 @@ describe.only('Dropdown', () => {
 
       expect(dropdown.find('.default-slot').classes()).toEqual(
         expect.arrayContaining(DropdownConfig.classes.option.split(' ')),
+      );
+    });
+  });
+
+  describe('when header slot exists', () => {
+    test('should render content', async () => {
+      const options = [
+        { id: 1, name: 'Test 1' },
+        { id: 2, name: 'Test 2' },
+        { id: 3, name: 'Test 3' },
+      ];
+
+      const dropdown = mount(Dropdown, {
+        props: {
+          options,
+        },
+        global: {
+          plugins: [MotionPlugin, vClickOutside],
+        },
+        slots: {
+          trigger: `<template #trigger="{toggle}">
+                        <button @click="toggle">Toggle</button>
+                    </template>`,
+          header: `<header></header>`,
+        },
+      });
+
+      const button = dropdown.find('button');
+
+      await button.trigger('click');
+
+      expect(dropdown.html()).toContain(`<header></header>`);
+    });
+
+    test('should have classes payload', async () => {
+      const options = [
+        { id: 1, name: 'Test 1' },
+        { id: 2, name: 'Test 2' },
+        { id: 3, name: 'Test 3' },
+      ];
+
+      const dropdown = mount(Dropdown, {
+        props: {
+          options,
+        },
+        global: {
+          plugins: [MotionPlugin, vClickOutside],
+        },
+        slots: {
+          trigger: `<template #trigger="{toggle}">
+                        <button @click="toggle">Toggle</button>
+                    </template>`,
+          header: `<template #header="{ classes }">
+              <header :class="classes.header">Header</header>
+            </template>`,
+        },
+      });
+
+      const button = dropdown.find('button');
+
+      await button.trigger('click');
+
+      expect(dropdown.find('header').classes()).toEqual(
+        expect.arrayContaining(DropdownConfig.classes.header.split(' ')),
       );
     });
   });
