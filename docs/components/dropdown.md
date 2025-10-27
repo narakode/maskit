@@ -131,3 +131,35 @@ const options = [
 </template>
 </Dropdown>
 :::
+
+## Konten Custom
+
+Isi dropdown yang ditampilkan bisa dicustom selain menampilkan props `options`, caranya dengan menambahkan slot `default`. Maka props `options` tidak akan dirender, yang dirender adalah slot `default`.
+
+Slot `default` menerima payload `classes` yang berupa objek berisi class untuk styling dropdown.
+
+```vue{7-9}
+<template>
+  <Dropdown :custom-class="{ content: 'top-12 left-0' }">
+    <template #trigger="{ toggle }">
+      <Button @click="toggle">Toggle Dropdown</Button>
+    </template>
+
+    <template #default="{ classes }">
+      <p :class="classes.option">Ini custom isi dropdown</p>
+    </template>
+  </Dropdown>
+</template>
+```
+
+::: raw
+<Dropdown :custom-class="{ content: 'top-12 left-0' }">
+<template #trigger="{ toggle }">
+<Button @click="toggle">Toggle Dropdown</Button>
+</template>
+<template #default="{ classes }">
+
+  <p :class="classes.option">Ini custom isi dropdown</p>
+</template>
+</Dropdown>
+:::
