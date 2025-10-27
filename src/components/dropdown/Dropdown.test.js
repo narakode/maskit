@@ -5,7 +5,7 @@ import { MotionPlugin } from '@vueuse/motion';
 import vClickOutside from 'click-outside-vue3';
 import DropdownConfig from './Dropdown.config';
 
-describe.only('Dropdown', () => {
+describe('Dropdown', () => {
   test('should not render dropdown list', () => {
     const dropdown = mount(Dropdown, {
       props: {
@@ -348,5 +348,36 @@ describe.only('Dropdown', () => {
     const [, content] = dropdown.findAll('div');
 
     expect(content.classes()).not.toContain('min-w-40');
+  });
+
+  test('should have content class from custom class prop', async () => {
+    const options = [
+      { id: 1, name: 'Test 1' },
+      { id: 2, name: 'Test 2' },
+      { id: 3, name: 'Test 3' },
+    ];
+
+    const dropdown = mount(Dropdown, {
+      props: {
+        options,
+        customClass: { content: 'left-100' },
+      },
+      global: {
+        plugins: [MotionPlugin, vClickOutside],
+      },
+      slots: {
+        trigger: `<template #trigger="{toggle}">
+                        <button @click="toggle">Toggle</button>
+                    </template>`,
+      },
+    });
+
+    const button = dropdown.find('button');
+
+    await button.trigger('click');
+
+    const [, content] = dropdown.findAll('div');
+
+    expect(content.classes()).toContain('left-100');
   });
 });
