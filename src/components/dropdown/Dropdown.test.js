@@ -109,7 +109,7 @@ describe.only('Dropdown', () => {
     ]);
   });
 
-  describe('Option', () => {
+  describe('Option Slot', () => {
     test('should have option and classes payload', async () => {
       const options = [
         { id: 1, name: 'Test 1' },
@@ -148,6 +148,77 @@ describe.only('Dropdown', () => {
         );
         expect(dropdownOption.text()).toEqual(`${option.id} - ${option.name}`);
       });
+    });
+  });
+
+  test('should not render option list when default slot is exists', async () => {
+    const options = [
+      { id: 1, name: 'Test 1' },
+      { id: 2, name: 'Test 2' },
+      { id: 3, name: 'Test 3' },
+    ];
+
+    const dropdown = mount(Dropdown, {
+      props: {
+        options,
+      },
+      global: {
+        plugins: [MotionPlugin, vClickOutside],
+      },
+      slots: {
+        trigger: `<template #trigger="{toggle}">
+                      <button @click="toggle">Toggle</button>
+                  </template>`,
+        option: `<template #option="{ option, classes }">
+                      <div :class="['option', classes.option]">{{ option.id }} - {{ option.name }}</div>
+                  </template>`,
+        default: `<div class="default-slot"></div>`,
+      },
+    });
+
+    const button = dropdown.find('button');
+
+    await button.trigger('click');
+
+    expect(dropdown.find('.option').exists()).toBe(false);
+    expect(dropdown.find('.default-slot').exists()).toBe(true);
+  });
+
+  describe('Default Slot', () => {
+    test('should have classes payload', async () => {
+      const options = [
+        { id: 1, name: 'Test 1' },
+        { id: 2, name: 'Test 2' },
+        { id: 3, name: 'Test 3' },
+      ];
+
+      const dropdown = mount(Dropdown, {
+        props: {
+          options,
+        },
+        global: {
+          plugins: [MotionPlugin, vClickOutside],
+        },
+        slots: {
+          trigger: `<template #trigger="{toggle}">
+                        <button @click="toggle">Toggle</button>
+                    </template>`,
+          option: `<template #option="{ option, classes }">
+                        <div :class="['option', classes.option]">{{ option.id }} - {{ option.name }}</div>
+                    </template>`,
+          default: `<template #default="{ classes }">
+                  <div :class="['default-slot', classes.option]"></div>
+                </template>`,
+        },
+      });
+
+      const button = dropdown.find('button');
+
+      await button.trigger('click');
+
+      expect(dropdown.find('.default-slot').classes()).toEqual(
+        expect.arrayContaining(DropdownConfig.classes.option.split(' ')),
+      );
     });
   });
 });
