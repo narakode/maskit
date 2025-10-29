@@ -47,6 +47,18 @@ describe.only('Input', () => {
     expect(wrapper.classes()).toContain('w-full');
   });
 
+  test('should update modelValue when input changed', async () => {
+    const wrapper = mount(Input, {
+      props: {
+        modelValue: 'init',
+        'onUpdate:modelValue': (e) => wrapper.setProps({ modelValue: e }),
+      },
+    });
+
+    await wrapper.find('input').setValue('test');
+    expect(wrapper.props('modelValue')).toEqual('test');
+  });
+
   describe('when tag is textarea', () => {
     test('should render textarea', () => {
       const wrapper = mount(Input, {
