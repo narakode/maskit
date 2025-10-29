@@ -30,6 +30,23 @@ describe.only('Input', () => {
     );
   });
 
+  test('should have default width class', () => {
+    const wrapper = mount(Input);
+
+    expect(wrapper.classes()).not.toContain('w-full');
+    expect(wrapper.classes()).not.toContain('w-fit');
+  });
+
+  test('should have width class by width prop', () => {
+    const wrapper = mount(Input, {
+      props: {
+        width: 'full',
+      },
+    });
+
+    expect(wrapper.classes()).toContain('w-full');
+  });
+
   describe('when tag is textarea', () => {
     test('should render textarea', () => {
       const wrapper = mount(Input, {
