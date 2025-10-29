@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue';
+import InputConfig from './Input.config';
 // import { debounce } from 'src/utils/debounce'; // ← required utility
 
 const props = defineProps({
@@ -25,18 +26,7 @@ const value = defineModel();
 const input = ref();
 
 const sizeClass = computed(() => {
-  const sizes = {
-    sm: [
-      'text-sm px-2 rounded',
-      props.tag === 'textarea' ? 'min-h-8 py-2' : 'h-8',
-    ],
-    md: [
-      'px-2.5 rounded-md',
-      props.tag === 'textarea' ? 'min-h-10 py-2' : 'h-10',
-    ],
-  };
-
-  return sizes[props.size];
+  return InputConfig.sizes[props.tag][props.size];
 });
 const widthClass = computed(() => {
   const widths = {
