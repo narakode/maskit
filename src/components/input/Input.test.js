@@ -65,6 +65,14 @@ describe.only('Input', () => {
     expect(wrapper.getCurrentComponent().refs).toHaveProperty('input');
   });
 
+  test('should emit input event when input changed', () => {
+    const wrapper = mount(Input);
+
+    wrapper.find('input').trigger('input', 'test');
+
+    expect(wrapper.emitted()).toHaveProperty('input');
+  });
+
   describe('when tag is textarea', () => {
     test('should render textarea', () => {
       const wrapper = mount(Input, {
