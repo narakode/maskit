@@ -36,7 +36,7 @@ function onToggle() {
 </script>
 
 <template>
-  <div class="relative">
+  <div class="inline-block relative w-auto">
     <slot name="trigger" :toggle="onToggle" />
     <div
       v-if="visible"
