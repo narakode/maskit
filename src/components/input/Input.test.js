@@ -59,6 +59,12 @@ describe.only('Input', () => {
     expect(wrapper.props('modelValue')).toEqual('test');
   });
 
+  test('should expose input element', () => {
+    const wrapper = mount(Input);
+
+    expect(wrapper.getCurrentComponent().refs).toHaveProperty('input');
+  });
+
   describe('when tag is textarea', () => {
     test('should render textarea', () => {
       const wrapper = mount(Input, {
