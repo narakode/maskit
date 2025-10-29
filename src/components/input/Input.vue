@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue';
 import InputConfig from './Input.config';
-// import { debounce } from 'src/utils/debounce'; // ← required utility
+import { debounce } from '../../utils/debounce';
 
 const props = defineProps({
   tag: {
@@ -45,11 +45,11 @@ const classes = computed(() => {
   ];
 });
 
-// const onInputDebounce = debounce(() => emit('input-debounce'), 500);
+const onInputDebounce = debounce(() => emit('input-debounce'), 500);
 
 function onInput() {
   emit('input');
-  //   onInputDebounce();
+  onInputDebounce();
 }
 
 defineExpose({ input });

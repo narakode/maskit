@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 import Input from './Input.vue';
 import InputConfig from './Input.config';
 
-describe.only('Input', () => {
+describe('Input', () => {
   test('should render input', () => {
     const wrapper = mount(Input);
 
