@@ -25,6 +25,7 @@ export default defineConfig({
           { text: 'Container', link: '/components/container' },
           { text: 'Description List', link: '/components/description-list' },
           { text: 'Dropdown', link: '/components/dropdown' },
+          { text: 'Form Item', link: '/components/form-item' },
           { text: 'Heading', link: '/components/heading' },
           { text: 'Input', link: '/components/input' },
           { text: 'Skeleton', link: '/components/skeleton' },
