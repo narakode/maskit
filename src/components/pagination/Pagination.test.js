@@ -181,18 +181,35 @@ describe.only('Pagination', () => {
     });
   });
 
-  test('should disable next when current page is last', () => {
-    const wrapper = mount(Pagination, {
-      props: {
-        totalPages: 5,
-        currentPage: 5,
-      },
+  describe('when current page is last', () => {
+    test('should disable next ', () => {
+      const wrapper = mount(Pagination, {
+        props: {
+          totalPages: 5,
+          currentPage: 5,
+        },
+      });
+
+      const next = wrapper.find('[aria-label="Next"]');
+
+      expect(next.exists()).toBe(true);
+      expect(next.element.tagName).toEqual('SPAN');
     });
 
-    const next = wrapper.find('[aria-label="Next"]');
+    test('should not emit change event on click', () => {
+      const wrapper = mount(Pagination, {
+        props: {
+          totalPages: 5,
+          currentPage: 5,
+        },
+      });
 
-    expect(next.exists()).toBe(true);
-    expect(next.element.tagName).toEqual('SPAN');
+      const next = wrapper.find('[aria-label="Next"]');
+
+      next.trigger('click');
+
+      expect(wrapper.emitted()).not.toHaveProperty('change-page');
+    });
   });
 
   test('should have next link when current page is not last', () => {

@@ -1,7 +1,7 @@
 <script setup>
 import { Icon } from '@iconify/vue';
 
-defineProps({
+const props = defineProps({
   totalPages: Number,
 });
 const emit = defineEmits(['change-page']);
@@ -26,8 +26,10 @@ function onChange(page) {
   }
 }
 function onNext() {
-  currentPage.value++;
-  emit('change-page');
+  if (currentPage.value < props.totalPages) {
+    currentPage.value++;
+    emit('change-page');
+  }
 }
 </script>
 
