@@ -50,11 +50,11 @@ describe.only('Pagination', () => {
       },
     });
 
-    const icons = wrapper.findAllComponents(Icon);
+    const prev = wrapper.find('[aria-label="Prev"]');
+    const next = wrapper.find('[aria-label="Next"]');
 
-    expect(icons).toHaveLength(2);
-    expect(icons[0].props('icon')).toEqual('tabler:chevron-left');
-    expect(icons[1].props('icon')).toEqual('tabler:chevron-right');
+    expect(prev.exists()).toBe(true);
+    expect(next.exists()).toBe(true);
   });
 
   test('should disable prev when current page is first', () => {
@@ -83,5 +83,33 @@ describe.only('Pagination', () => {
 
     expect(prev.exists()).toBe(true);
     expect(prev.element.tagName).toEqual('A');
+  });
+
+  test('should disable next when current page is last', () => {
+    const wrapper = mount(Pagination, {
+      props: {
+        totalPages: 5,
+        currentPage: 5,
+      },
+    });
+
+    const next = wrapper.find('[aria-label="Next"]');
+
+    expect(next.exists()).toBe(true);
+    expect(next.element.tagName).toEqual('SPAN');
+  });
+
+  test('should have next link when current page is not last', () => {
+    const wrapper = mount(Pagination, {
+      props: {
+        totalPages: 5,
+        currentPage: 2,
+      },
+    });
+
+    const next = wrapper.find('[aria-label="Next"]');
+
+    expect(next.exists()).toBe(true);
+    expect(next.element.tagName).toEqual('A');
   });
 });

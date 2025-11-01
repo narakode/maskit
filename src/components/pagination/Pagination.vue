@@ -63,6 +63,7 @@ function onNext() {
 
     <component
       :is="currentPage < totalPages ? 'a' : 'span'"
+      aria-label="Next"
       :class="[
         classes.item,
         currentPage < totalPages
