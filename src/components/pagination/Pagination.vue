@@ -20,8 +20,10 @@ function onPrev() {
   }
 }
 function onChange(page) {
-  currentPage.value = page;
-  emit('change-page');
+  if (page !== currentPage.value) {
+    currentPage.value = page;
+    emit('change-page');
+  }
 }
 function onNext() {
   currentPage.value++;
