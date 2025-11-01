@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
 import Pagination from './Pagination.vue';
 
-describe.only('Pagination', () => {
+describe('Pagination', () => {
   test('should render page numbers', () => {
     const wrapper = mount(Pagination, {
       props: {
@@ -212,17 +212,50 @@ describe.only('Pagination', () => {
     });
   });
 
-  test('should have next link when current page is not last', () => {
-    const wrapper = mount(Pagination, {
-      props: {
-        totalPages: 5,
-        currentPage: 2,
-      },
+  describe('when current page is not last', () => {
+    test('should have next link', () => {
+      const wrapper = mount(Pagination, {
+        props: {
+          totalPages: 5,
+          currentPage: 2,
+        },
+      });
+
+      const next = wrapper.find('[aria-label="Next"]');
+
+      expect(next.exists()).toBe(true);
+      expect(next.element.tagName).toEqual('A');
     });
 
-    const next = wrapper.find('[aria-label="Next"]');
+    test('should emit change event on click', () => {
+      const wrapper = mount(Pagination, {
+        props: {
+          totalPages: 5,
+          currentPage: 4,
+        },
+      });
 
-    expect(next.exists()).toBe(true);
-    expect(next.element.tagName).toEqual('A');
+      const next = wrapper.find('[aria-label="Next"]');
+
+      next.trigger('click');
+
+      expect(wrapper.emitted()).toHaveProperty('change-page');
+    });
+
+    test('should update current page model on click', async () => {
+      const wrapper = mount(Pagination, {
+        props: {
+          totalPages: 5,
+          currentPage: 4,
+          'onUpdate:currentPage': (e) => wrapper.setProps({ currentPage: e }),
+        },
+      });
+
+      const next = wrapper.find('[aria-label="Next"]');
+
+      await next.trigger('click');
+
+      expect(wrapper.props('currentPage')).toEqual(5);
+    });
   });
 });
