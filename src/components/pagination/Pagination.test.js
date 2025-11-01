@@ -71,6 +71,22 @@ describe.only('Pagination', () => {
 
       expect(wrapper.emitted()).not.toHaveProperty('change-page');
     });
+
+    test('should update current page model on change', async () => {
+      const wrapper = mount(Pagination, {
+        props: {
+          totalPages: 5,
+          currentPage: 3,
+          'onUpdate:currentPage': (e) => wrapper.setProps({ currentPage: e }),
+        },
+      });
+
+      const links = wrapper.findAll('a');
+
+      await links[4].trigger('click');
+
+      expect(wrapper.props('currentPage')).toEqual(4);
+    });
   });
 
   test('should render action', () => {
