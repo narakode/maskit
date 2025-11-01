@@ -103,32 +103,82 @@ describe.only('Pagination', () => {
     expect(next.exists()).toBe(true);
   });
 
-  test('should disable prev when current page is first', () => {
-    const wrapper = mount(Pagination, {
-      props: {
-        totalPages: 5,
-        currentPage: 1,
-      },
+  describe('when current page is first', () => {
+    test('should disable prev', () => {
+      const wrapper = mount(Pagination, {
+        props: {
+          totalPages: 5,
+          currentPage: 1,
+        },
+      });
+
+      const prev = wrapper.find('[aria-label="Prev"]');
+
+      expect(prev.exists()).toBe(true);
+      expect(prev.element.tagName).toEqual('SPAN');
     });
 
-    const prev = wrapper.find('[aria-label="Prev"]');
+    test('should not emit change event on click', () => {
+      const wrapper = mount(Pagination, {
+        props: {
+          totalPages: 5,
+          currentPage: 1,
+        },
+      });
 
-    expect(prev.exists()).toBe(true);
-    expect(prev.element.tagName).toEqual('SPAN');
+      const prev = wrapper.find('[aria-label="Prev"]');
+
+      prev.trigger('click');
+
+      expect(wrapper.emitted()).not.toHaveProperty('change-page');
+    });
   });
 
-  test('should have prev link when current page is not first', () => {
-    const wrapper = mount(Pagination, {
-      props: {
-        totalPages: 5,
-        currentPage: 2,
-      },
+  describe('when current page is not first', () => {
+    test('should have prev link', () => {
+      const wrapper = mount(Pagination, {
+        props: {
+          totalPages: 5,
+          currentPage: 2,
+        },
+      });
+
+      const prev = wrapper.find('[aria-label="Prev"]');
+
+      expect(prev.exists()).toBe(true);
+      expect(prev.element.tagName).toEqual('A');
     });
 
-    const prev = wrapper.find('[aria-label="Prev"]');
+    test('should emit change event on click', () => {
+      const wrapper = mount(Pagination, {
+        props: {
+          totalPages: 5,
+          currentPage: 2,
+        },
+      });
 
-    expect(prev.exists()).toBe(true);
-    expect(prev.element.tagName).toEqual('A');
+      const prev = wrapper.find('[aria-label="Prev"]');
+
+      prev.trigger('click');
+
+      expect(wrapper.emitted()).toHaveProperty('change-page');
+    });
+
+    test('should update current page model on click', async () => {
+      const wrapper = mount(Pagination, {
+        props: {
+          totalPages: 5,
+          currentPage: 2,
+          'onUpdate:currentPage': (e) => wrapper.setProps({ currentPage: e }),
+        },
+      });
+
+      const prev = wrapper.find('[aria-label="Prev"]');
+
+      await prev.trigger('click');
+
+      expect(wrapper.props('currentPage')).toEqual(1);
+    });
   });
 
   test('should disable next when current page is last', () => {
