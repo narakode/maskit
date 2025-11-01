@@ -35,6 +35,7 @@ function onNext() {
   >
     <component
       :is="currentPage > 1 ? 'a' : 'span'"
+      aria-label="Prev"
       :class="[
         classes.item,
         currentPage > 1
