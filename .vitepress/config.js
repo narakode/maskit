@@ -28,6 +28,7 @@ export default defineConfig({
           { text: 'Form Item', link: '/components/form-item' },
           { text: 'Heading', link: '/components/heading' },
           { text: 'Input', link: '/components/input' },
+          { text: 'Pagination', link: '/components/pagination' },
           { text: 'Skeleton', link: '/components/skeleton' },
           { text: 'Spinner', link: '/components/spinner' },
         ],

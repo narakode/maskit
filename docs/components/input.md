@@ -186,9 +186,9 @@ onMounted(() => input.value.input.focus());
 
 ## Models
 
-| Nama      | Payload | Fungsi              |
-| --------- | ------- | ------------------- |
-| `default` | `-`     | Binding nilai input |
+| Nama      | Type   | Fungsi              |
+| --------- | ------ | ------------------- |
+| `default` | `null` | Binding nilai input |
 
 ## Events
 
