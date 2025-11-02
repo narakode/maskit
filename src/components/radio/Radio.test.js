@@ -16,6 +16,7 @@ describe.only('Radio', () => {
 
     expect(radio.element.disabled).toBe(false);
     expect(radio.element.name).toBe('');
+    expect(radio.element.value).toBe('on');
     expect(radio.element.id).not.toBeNull();
   });
 
@@ -23,5 +24,64 @@ describe.only('Radio', () => {
     const wrapper = mount(Radio);
 
     expect(wrapper.find('label').exists()).toBe(false);
+  });
+
+  test('should set input attributes', () => {
+    const wrapper = mount(Radio, {
+      props: {
+        name: 'Test',
+        inputValue: 'Test',
+      },
+    });
+
+    const radio = wrapper.find('input[type=radio]');
+
+    expect(radio.element.name).toBe('Test');
+    expect(radio.element.value).toBe('Test');
+  });
+
+  test('should render label', () => {
+    const wrapper = mount(Radio, {
+      props: {
+        label: 'Test',
+      },
+    });
+
+    const radio = wrapper.find('input');
+    const label = wrapper.find('label');
+
+    expect(label.exists()).toBe(true);
+    expect(label.text()).toEqual('Test');
+    expect(label.element.getAttribute('for')).toEqual(radio.element.id);
+  });
+
+  test('should render id on input and for on label when id exists', () => {
+    const wrapper = mount(Radio, {
+      props: {
+        id: 'test',
+        label: 'Test',
+      },
+    });
+
+    const radio = wrapper.find('input');
+    const label = wrapper.find('label');
+
+    expect(radio.element.id).toEqual('test');
+    expect(label.element.getAttribute('for')).toEqual('test');
+  });
+
+  test('should disable input and label when disabled', () => {
+    const wrapper = mount(Radio, {
+      props: {
+        label: 'Test',
+        disabled: true,
+      },
+    });
+
+    const radio = wrapper.find('input');
+    const label = wrapper.find('label');
+
+    expect(radio.element.disabled).toBe(true);
+    expect(label.classes()).toContain('text-gray-500');
   });
 });
