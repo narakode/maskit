@@ -14,5 +14,6 @@ export default {
     'light-warning': 'text-yellow-100',
     'light-error': 'text-red-100',
     'light-success': 'text-green-100',
+    'light-secondary': 'text-gray-100',
   },
 };
