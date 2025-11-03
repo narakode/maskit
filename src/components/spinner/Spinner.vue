@@ -19,6 +19,7 @@ const props = defineProps({
         'light-error',
         'light-warning',
         'light-success',
+        'light-secondary',
       ].includes(value),
   },
   size: {

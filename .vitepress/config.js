@@ -29,6 +29,7 @@ export default defineConfig({
           { text: 'Heading', link: '/components/heading' },
           { text: 'Input', link: '/components/input' },
           { text: 'Pagination', link: '/components/pagination' },
+          { text: 'Radio', link: '/components/radio' },
           { text: 'Skeleton', link: '/components/skeleton' },
           { text: 'Spinner', link: '/components/spinner' },
         ],
