@@ -136,4 +136,22 @@ describe.only('Confirm', () => {
 
     expect(confirmButton.props('loading')).toEqual(true);
   });
+
+  test('should set confirm button color when confirm color exists', () => {
+    const wrapper = mount(Confirm, {
+      props: {
+        title: 'Test',
+        message: 'Test',
+        visible: true,
+        confirmColor: 'error',
+      },
+      global: {
+        plugins: [vClickOutside, MotionPlugin],
+      },
+    });
+
+    const [confirmButton] = wrapper.findAllComponents(Button);
+
+    expect(confirmButton.props('color')).toEqual('error');
+  });
 });
