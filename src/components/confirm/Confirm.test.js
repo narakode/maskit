@@ -118,4 +118,22 @@ describe.only('Confirm', () => {
     expect(cancelButton.exists()).toBe(true);
     expect(cancelButton.text()).toEqual('Test');
   });
+
+  test('should disable confirm button when loading', () => {
+    const wrapper = mount(Confirm, {
+      props: {
+        title: 'Test',
+        message: 'Test',
+        visible: true,
+        loading: true,
+      },
+      global: {
+        plugins: [vClickOutside, MotionPlugin],
+      },
+    });
+
+    const [confirmButton] = wrapper.findAllComponents(Button);
+
+    expect(confirmButton.props('loading')).toEqual(true);
+  });
 });
