@@ -18,8 +18,9 @@ defineProps({
   },
   confirmColor: {
     type: String,
-    default: 'red',
-    validator: (value) => ['blue', 'red', 'yellow', 'green'].includes(value),
+    default: 'primary',
+    validator: (value) =>
+      ['primary', 'error', 'warning', 'success'].includes(value),
   },
   cancelText: {
     type: String,

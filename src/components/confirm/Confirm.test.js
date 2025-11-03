@@ -4,6 +4,8 @@ import Confirm from './Confirm.vue';
 import Modal from '../modal/Modal.vue';
 import vClickOutside from 'click-outside-vue3';
 import { MotionPlugin } from '@vueuse/motion';
+import Heading from '../heading/Heading.vue';
+import Button from '../button/Button.vue';
 
 describe.only('Confirm', () => {
   test('should render Modal', () => {
@@ -38,5 +40,82 @@ describe.only('Confirm', () => {
       container: 'w-fit mx-auto px-4',
     });
     expect(modal.props('cardProps')).toEqual({ paddless: true, class: 'p-8' });
+  });
+
+  test('should render title', () => {
+    const wrapper = mount(Confirm, {
+      props: {
+        title: 'Test',
+        message: 'Test',
+        visible: true,
+      },
+      global: {
+        plugins: [vClickOutside, MotionPlugin],
+      },
+    });
+
+    const title = wrapper.findComponent(Heading);
+
+    expect(title.exists()).toBe(true);
+    expect(title.props('title')).toEqual('Test');
+    expect(title.props('level')).toEqual(4);
+  });
+
+  test('should render message', () => {
+    const wrapper = mount(Confirm, {
+      props: {
+        title: 'Test',
+        message: 'Test',
+        visible: true,
+      },
+      global: {
+        plugins: [vClickOutside, MotionPlugin],
+      },
+    });
+
+    const message = wrapper.find('p');
+
+    expect(message.exists()).toBe(true);
+    expect(message.text()).toEqual('Test');
+  });
+
+  test('should render confirm button', () => {
+    const wrapper = mount(Confirm, {
+      props: {
+        title: 'Test',
+        message: 'Test',
+        visible: true,
+        confirmText: 'Test',
+      },
+      global: {
+        plugins: [vClickOutside, MotionPlugin],
+      },
+    });
+
+    const [confirmButton] = wrapper.findAllComponents(Button);
+
+    expect(confirmButton.exists()).toBe(true);
+    expect(confirmButton.text()).toEqual('Test');
+    expect(confirmButton.props('color')).toEqual('primary');
+    expect(confirmButton.props('loading')).toEqual(false);
+  });
+
+  test('should render cancel button', () => {
+    const wrapper = mount(Confirm, {
+      props: {
+        title: 'Test',
+        message: 'Test',
+        visible: true,
+        cancelText: 'Test',
+      },
+      global: {
+        plugins: [vClickOutside, MotionPlugin],
+      },
+    });
+
+    const [, cancelButton] = wrapper.findAllComponents(Button);
+
+    expect(cancelButton.exists()).toBe(true);
+    expect(cancelButton.text()).toEqual('Test');
   });
 });
