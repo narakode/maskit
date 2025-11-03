@@ -7,7 +7,7 @@ import { MotionPlugin } from '@vueuse/motion';
 import Heading from '../heading/Heading.vue';
 import Button from '../button/Button.vue';
 
-describe.only('Confirm', () => {
+describe('Confirm', () => {
   test('should render Modal', () => {
     const wrapper = mount(Confirm, {
       props: {
@@ -153,5 +153,45 @@ describe.only('Confirm', () => {
     const [confirmButton] = wrapper.findAllComponents(Button);
 
     expect(confirmButton.props('color')).toEqual('error');
+  });
+
+  test('should emit confirmed when confirm button clicked', () => {
+    const wrapper = mount(Confirm, {
+      props: {
+        title: 'Test',
+        message: 'Test',
+        visible: true,
+      },
+      global: {
+        plugins: [vClickOutside, MotionPlugin],
+      },
+    });
+
+    const [confirmButton] = wrapper.findAllComponents(Button);
+
+    confirmButton.trigger('click');
+
+    expect(wrapper.emitted()).toHaveProperty('confirmed');
+  });
+
+  test('should hide modal when cancel button clicked', async () => {
+    const wrapper = mount(Confirm, {
+      props: {
+        title: 'Test',
+        message: 'Test',
+        visible: true,
+        'onUpdate:visible': (e) => wrapper.setProps({ visible: e }),
+      },
+      global: {
+        plugins: [vClickOutside, MotionPlugin],
+      },
+    });
+
+    const [, cancelButton] = wrapper.findAllComponents(Button);
+    const modal = wrapper.findComponent(Modal);
+
+    await cancelButton.trigger('click');
+
+    expect(modal.props('visible')).toEqual(false);
   });
 });
