@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
 import Radio from './Radio.vue';
 
-describe.only('Radio', () => {
+describe('Radio', () => {
   test('should render input radio', () => {
     const wrapper = mount(Radio);
 
@@ -83,5 +83,33 @@ describe.only('Radio', () => {
 
     expect(radio.element.disabled).toBe(true);
     expect(label.classes()).toContain('text-gray-500');
+  });
+
+  describe('when value changed', () => {
+    test('should update modelValue', async () => {
+      const wrapper = mount(Radio, {
+        props: {
+          inputValue: 'test',
+          modelValue: '',
+          'onUpdate:modelValue': (e) => wrapper.setProps({ modelValue: e }),
+        },
+      });
+
+      const radio = wrapper.find('input');
+
+      await radio.trigger('change');
+
+      expect(wrapper.props('modelValue')).toEqual('test');
+    });
+
+    test('should emit change', () => {
+      const wrapper = mount(Radio);
+
+      const radio = wrapper.find('input');
+
+      radio.trigger('change');
+
+      expect(wrapper.emitted()).toHaveProperty('change');
+    });
   });
 });
