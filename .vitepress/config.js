@@ -22,6 +22,7 @@ export default defineConfig({
           { text: 'Badge', link: '/components/badge' },
           { text: 'Button', link: '/components/button' },
           { text: 'Card', link: '/components/card' },
+          { text: 'Confirm', link: '/components/confirm' },
           { text: 'Container', link: '/components/container' },
           { text: 'Description List', link: '/components/description-list' },
           { text: 'Dropdown', link: '/components/dropdown' },
