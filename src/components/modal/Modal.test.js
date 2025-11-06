@@ -118,4 +118,50 @@ describe.only('Modal', () => {
 
     expect(wrapper.props('visible')).toBe(false);
   });
+
+  test('should not render container when with-container prop is false', () => {
+    const wrapper = mount(Modal, {
+      props: {
+        visible: true,
+        withContainer: false,
+      },
+      global: {
+        plugins: [vClickOutside, MotionPlugin],
+      },
+    });
+
+    expect(wrapper.findComponent(Container).exists()).toBe(false);
+  });
+
+  test('should apply class to container when customClass container is exists', () => {
+    const wrapper = mount(Modal, {
+      props: {
+        visible: true,
+        customClass: {
+          container: 'bg-red-100',
+        },
+      },
+      global: {
+        plugins: [vClickOutside, MotionPlugin],
+      },
+    });
+
+    expect(wrapper.findComponent(Container).classes()).toContain('bg-red-100');
+  });
+
+  test('should apply props to container when containerProps is exists', () => {
+    const wrapper = mount(Modal, {
+      props: {
+        visible: true,
+        containerProps: {
+          maxScreen: 'sm',
+        },
+      },
+      global: {
+        plugins: [vClickOutside, MotionPlugin],
+      },
+    });
+
+    expect(wrapper.findComponent(Container).props('maxScreen')).toEqual('sm');
+  });
 });
