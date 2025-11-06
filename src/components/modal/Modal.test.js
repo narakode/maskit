@@ -4,6 +4,7 @@ import Modal from './Modal.vue';
 import vClickOutside from 'click-outside-vue3';
 import { MotionPlugin } from '@vueuse/motion';
 import Container from '../container/Container.vue';
+import Card from '../card/Card.vue';
 
 describe.only('Modal', () => {
   test('should not render content by default', () => {
@@ -46,5 +47,21 @@ describe.only('Modal', () => {
     });
 
     expect(wrapper.findComponent(Container).exists()).toBe(true);
+  });
+
+  test('should render Card', () => {
+    const wrapper = mount(Modal, {
+      props: {
+        visible: true,
+      },
+      global: {
+        plugins: [vClickOutside, MotionPlugin],
+      },
+    });
+
+    const card = wrapper.findComponent(Card);
+
+    expect(card.exists()).toBe(true);
+    expect(card.props('bordered')).toBe(false);
   });
 });
