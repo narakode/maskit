@@ -3,6 +3,7 @@ import { describe, expect, test } from 'vitest';
 import Modal from './Modal.vue';
 import vClickOutside from 'click-outside-vue3';
 import { MotionPlugin } from '@vueuse/motion';
+import Container from '../container/Container.vue';
 
 describe.only('Modal', () => {
   test('should not render content by default', () => {
@@ -32,5 +33,18 @@ describe.only('Modal', () => {
 
     expect(container.exists()).toBe(true);
     expect(container.html()).toContain('<p>test</p>');
+  });
+
+  test('should render Container', () => {
+    const wrapper = mount(Modal, {
+      props: {
+        visible: true,
+      },
+      global: {
+        plugins: [vClickOutside, MotionPlugin],
+      },
+    });
+
+    expect(wrapper.findComponent(Container).exists()).toBe(true);
   });
 });
