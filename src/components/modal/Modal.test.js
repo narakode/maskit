@@ -211,4 +211,36 @@ describe.only('Modal', () => {
       expect.arrayContaining(['flex', 'items-center']),
     );
   });
+
+  describe('when opened', () => {
+    test('should emit opened event', async () => {
+      const wrapper = mount(Modal, {
+        props: {
+          visible: false,
+        },
+        global: {
+          plugins: [vClickOutside, MotionPlugin],
+        },
+      });
+
+      await wrapper.setProps({ visible: true });
+
+      expect(wrapper.emitted()).toHaveProperty('opened');
+    });
+
+    test('should hide body scrollbar', async () => {
+      const wrapper = mount(Modal, {
+        props: {
+          visible: false,
+        },
+        global: {
+          plugins: [vClickOutside, MotionPlugin],
+        },
+      });
+
+      await wrapper.setProps({ visible: true });
+
+      expect(document.body.classList).toContain('overflow-y-hidden');
+    });
+  });
 });
