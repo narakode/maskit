@@ -18,7 +18,7 @@ defineProps({
   cardProps: null,
   containerProps: null,
   title: String,
-  alignVertical: {
+  verticalAlign: {
     type: String,
     default: 'top',
     validator: (value) => ['top', 'center'].includes(value),
@@ -48,7 +48,7 @@ watch(visible, (newValue) => {
     v-if="visible"
     :class="[
       'fixed inset-0 bg-black/30 py-20 z-10 overflow-y-auto',
-      alignVertical === 'center' ? 'flex items-center' : '',
+      verticalAlign === 'center' ? 'flex items-center' : '',
     ]"
   >
     <component

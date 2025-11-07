@@ -180,4 +180,35 @@ describe.only('Modal', () => {
 
     expect(wrapper.findComponent(Card).props('paddless')).toBe(true);
   });
+
+  test('should align modal to top by default', () => {
+    const wrapper = mount(Modal, {
+      props: {
+        visible: true,
+      },
+      global: {
+        plugins: [vClickOutside, MotionPlugin],
+      },
+    });
+
+    expect(wrapper.find('div').classes()).not.toEqual(
+      expect.arrayContaining(['flex', 'items-center']),
+    );
+  });
+
+  test('should align modal to center when vertical align is center', () => {
+    const wrapper = mount(Modal, {
+      props: {
+        visible: true,
+        verticalAlign: 'center',
+      },
+      global: {
+        plugins: [vClickOutside, MotionPlugin],
+      },
+    });
+
+    expect(wrapper.find('div').classes()).toEqual(
+      expect.arrayContaining(['flex', 'items-center']),
+    );
+  });
 });
