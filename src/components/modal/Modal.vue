@@ -25,7 +25,7 @@ defineProps({
   },
 });
 
-const emit = defineEmits(['opened']);
+const emit = defineEmits(['opened', 'closed']);
 
 const visible = defineModel('visible');
 
@@ -38,6 +38,7 @@ watch(visible, (newValue) => {
     emit('opened');
     document.body.classList.add('overflow-y-hidden');
   } else {
+    emit('closed');
     document.body.classList.remove('overflow-y-hidden');
   }
 });

@@ -7,7 +7,7 @@ import Container from '../container/Container.vue';
 import Card from '../card/Card.vue';
 import { Icon } from '@iconify/vue';
 
-describe.only('Modal', () => {
+describe('Modal', () => {
   test('should not render content by default', () => {
     const wrapper = mount(Modal, {
       global: {
@@ -241,6 +241,38 @@ describe.only('Modal', () => {
       await wrapper.setProps({ visible: true });
 
       expect(document.body.classList).toContain('overflow-y-hidden');
+    });
+  });
+
+  describe('when closed', () => {
+    test('should emit closed event', async () => {
+      const wrapper = mount(Modal, {
+        props: {
+          visible: true,
+        },
+        global: {
+          plugins: [vClickOutside, MotionPlugin],
+        },
+      });
+
+      await wrapper.setProps({ visible: false });
+
+      expect(wrapper.emitted()).toHaveProperty('closed');
+    });
+
+    test('should hide body scrollbar', async () => {
+      const wrapper = mount(Modal, {
+        props: {
+          visible: true,
+        },
+        global: {
+          plugins: [vClickOutside, MotionPlugin],
+        },
+      });
+
+      await wrapper.setProps({ visible: false });
+
+      expect(document.body.classList).not.toContain('overflow-y-hidden');
     });
   });
 });
