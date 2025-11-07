@@ -133,7 +133,7 @@ describe.only('Modal', () => {
     expect(wrapper.findComponent(Container).exists()).toBe(false);
   });
 
-  test('should apply class to container when customClass container is exists', () => {
+  test('should apply class to Container when customClass container is exists', () => {
     const wrapper = mount(Modal, {
       props: {
         visible: true,
@@ -149,7 +149,7 @@ describe.only('Modal', () => {
     expect(wrapper.findComponent(Container).classes()).toContain('bg-red-100');
   });
 
-  test('should apply props to container when containerProps is exists', () => {
+  test('should apply props to Container when containerProps is exists', () => {
     const wrapper = mount(Modal, {
       props: {
         visible: true,
@@ -163,5 +163,21 @@ describe.only('Modal', () => {
     });
 
     expect(wrapper.findComponent(Container).props('maxScreen')).toEqual('sm');
+  });
+
+  test('should apply props to Card when cardProps is exists', () => {
+    const wrapper = mount(Modal, {
+      props: {
+        visible: true,
+        cardProps: {
+          paddless: true,
+        },
+      },
+      global: {
+        plugins: [vClickOutside, MotionPlugin],
+      },
+    });
+
+    expect(wrapper.findComponent(Card).props('paddless')).toBe(true);
   });
 });
