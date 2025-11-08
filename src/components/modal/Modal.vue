@@ -48,7 +48,7 @@ watch(visible, (newValue) => {
   <div
     v-if="visible"
     :class="[
-      'fixed inset-0 bg-black/30 py-20 z-10 overflow-y-auto',
+      'fixed inset-0 bg-black/30 py-20 z-9999 overflow-y-auto',
       verticalAlign === 'center' ? 'flex items-center' : '',
     ]"
   >
