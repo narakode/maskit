@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 import List from './List.vue';
 import Card from '../card/Card.vue';
 
-describe.only('List', () => {
+describe('List', () => {
   test('should render paddless Card', () => {
     const wrapper = mount(List);
 
@@ -151,5 +151,17 @@ describe.only('List', () => {
     const listWrapper = wrapper.find('[data-test="wrapper"]');
 
     expect(listWrapper.classes()).not.toContain('divide-y');
+  });
+
+  test('should override empty message', () => {
+    const wrapper = mount(List, {
+      props: {
+        emptyMessage: 'Test',
+      },
+    });
+
+    const emptyMessage = wrapper.find('.text-gray-700.text-center');
+
+    expect(emptyMessage.text()).toEqual('Test');
   });
 });
