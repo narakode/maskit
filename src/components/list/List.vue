@@ -47,7 +47,12 @@ const classes = computed(() => {
         {{ emptyMessage }}
       </div>
       <slot :classes="{ item: classes.item }">
-        <div v-for="(item, index) in data" :key="item.id" :class="classes.item">
+        <div
+          v-for="(item, index) in data"
+          :key="item.id"
+          :class="classes.item"
+          data-test="item"
+        >
           <slot name="item" :index="index" :item="item" />
         </div>
       </slot>

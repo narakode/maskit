@@ -68,4 +68,37 @@ describe.only('List', () => {
 
     expect(wrapper.html()).toContain('<p>test</p>');
   });
+
+  test('should have default item size class', () => {
+    const wrapper = mount(List, {
+      props: {
+        data: [{ id: 1, name: 'item 1' }],
+      },
+      slots: {
+        item: `<template #item="{ classes, item }"><p>{{ item.name }}</p></template>`,
+      },
+    });
+
+    const item = wrapper.find('[data-test="item"]');
+
+    expect(item.classes()).toContain('p-4');
+  });
+
+  test('should have item size class by size prop', () => {
+    const wrapper = mount(List, {
+      props: {
+        data: [{ id: 1, name: 'item 1' }],
+        size: 'sm',
+      },
+      slots: {
+        item: `<template #item="{ classes, item }"><p>{{ item.name }}</p></template>`,
+      },
+    });
+
+    const item = wrapper.find('[data-test="item"]');
+
+    expect(item.classes()).toEqual(
+      expect.arrayContaining('px-3 py-2'.split(' ')),
+    );
+  });
 });
