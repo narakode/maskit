@@ -101,4 +101,35 @@ describe.only('List', () => {
       expect.arrayContaining('px-3 py-2'.split(' ')),
     );
   });
+
+  test('should not have hover class by default', () => {
+    const wrapper = mount(List, {
+      props: {
+        data: [{ id: 1, name: 'item 1' }],
+      },
+      slots: {
+        item: `<template #item="{ classes, item }"><p>{{ item.name }}</p></template>`,
+      },
+    });
+
+    const item = wrapper.find('[data-test="item"]');
+
+    expect(item.classes()).not.toContain('hover:bg-gray-50');
+  });
+
+  test('should have hover class when hoverable is true', () => {
+    const wrapper = mount(List, {
+      props: {
+        data: [{ id: 1, name: 'item 1' }],
+        hoverable: true,
+      },
+      slots: {
+        item: `<template #item="{ classes, item }"><p>{{ item.name }}</p></template>`,
+      },
+    });
+
+    const item = wrapper.find('[data-test="item"]');
+
+    expect(item.classes()).toContain('hover:bg-gray-50');
+  });
 });
