@@ -29,6 +29,7 @@ export default defineConfig({
           { text: 'Form Item', link: '/components/form-item' },
           { text: 'Heading', link: '/components/heading' },
           { text: 'Input', link: '/components/input' },
+          { text: 'List', link: '/components/list' },
           { text: 'Modal', link: '/components/modal' },
           { text: 'Pagination', link: '/components/pagination' },
           { text: 'Radio', link: '/components/radio' },
