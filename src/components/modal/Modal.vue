@@ -18,14 +18,14 @@ defineProps({
   cardProps: null,
   containerProps: null,
   title: String,
-  alignVertical: {
+  verticalAlign: {
     type: String,
     default: 'top',
     validator: (value) => ['top', 'center'].includes(value),
   },
 });
 
-const emit = defineEmits(['opened']);
+const emit = defineEmits(['opened', 'closed']);
 
 const visible = defineModel('visible');
 
@@ -38,6 +38,7 @@ watch(visible, (newValue) => {
     emit('opened');
     document.body.classList.add('overflow-y-hidden');
   } else {
+    emit('closed');
     document.body.classList.remove('overflow-y-hidden');
   }
 });
@@ -47,8 +48,8 @@ watch(visible, (newValue) => {
   <div
     v-if="visible"
     :class="[
-      'fixed inset-0 bg-black/30 py-20 z-10 overflow-y-auto',
-      alignVertical === 'center' ? 'flex items-center' : '',
+      'fixed inset-0 bg-black/30 py-20 z-9999 overflow-y-auto',
+      verticalAlign === 'center' ? 'flex items-center' : '',
     ]"
   >
     <component
