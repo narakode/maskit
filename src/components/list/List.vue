@@ -38,7 +38,10 @@ const classes = computed(() => {
 
 <template>
   <Card paddless>
-    <div :class="[striped ? 'divide-y divide-gray-300' : '']">
+    <div
+      data-test="wrapper"
+      :class="[striped ? 'divide-y divide-gray-300' : '']"
+    >
       <slot name="header" :classes="{ item: classes.item }" />
       <div
         v-if="!data.length"

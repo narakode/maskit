@@ -132,4 +132,24 @@ describe.only('List', () => {
 
     expect(item.classes()).toContain('hover:bg-gray-50');
   });
+
+  test('should have striped class by default', () => {
+    const wrapper = mount(List);
+
+    const listWrapper = wrapper.find('[data-test="wrapper"]');
+
+    expect(listWrapper.classes()).toContain('divide-y');
+  });
+
+  test('should not have striped class when striped is true', () => {
+    const wrapper = mount(List, {
+      props: {
+        striped: false,
+      },
+    });
+
+    const listWrapper = wrapper.find('[data-test="wrapper"]');
+
+    expect(listWrapper.classes()).not.toContain('divide-y');
+  });
 });
