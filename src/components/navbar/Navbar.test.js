@@ -113,7 +113,7 @@ describe.only('Navbar', () => {
     expect(brand.text()).toEqual('Test');
   });
 
-  expect('should display start menu on desktop when brand is exists', () => {
+  test('should display start menu on desktop when brand is exists', () => {
     const wrapper = mount(Navbar, {
       props: {
         brand: 'Test',
@@ -131,6 +131,88 @@ describe.only('Navbar', () => {
 
     const start = wrapper.find('[data-test="start"]');
 
-    expect(brand.classes()).not.toContain('sm:hidden');
+    expect(start.classes()).not.toContain('sm:hidden');
+  });
+
+  test('should render start slot', () => {
+    const wrapper = mount(Navbar, {
+      props: {
+        brand: 'Test',
+        brandRoute: {
+          name: 'home',
+        },
+      },
+      slots: {
+        start: '<p>Test</p>',
+      },
+      global: {
+        plugins: [
+          createRouter({ history: createWebHistory(), routes }),
+          vclickOutside,
+        ],
+      },
+    });
+
+    const start = wrapper.find('[data-test="start"]');
+
+    expect(start.exists()).toBe(false);
+    expect(wrapper.html()).toContain('<p>Test</p>');
+  });
+
+  test('should render menu links', () => {
+    const menus = [
+      { id: 1, name: 'link 1', href: 'link 1' },
+      { id: 2, name: 'link 2', href: 'link 2' },
+      { id: 3, name: 'link 3', href: 'link 3' },
+    ];
+
+    const wrapper = mount(Navbar, {
+      props: {
+        menus,
+      },
+      global: {
+        plugins: [
+          createRouter({ history: createWebHistory(), routes }),
+          vclickOutside,
+        ],
+      },
+    });
+
+    const links = wrapper.findAll('a');
+
+    expect(links).toHaveLength(3);
+    expect(
+      links.map((link) => ({
+        href: link.element.getAttribute('href'),
+        name: link.text(),
+      })),
+    ).toEqual(menus.map((menu) => ({ href: menu.href, name: menu.name })));
+  });
+
+  test('should render menu route links', () => {
+    const menus = [
+      { id: 1, name: 'link 1', to: { name: 'home' } },
+      { id: 2, name: 'link 2', to: { name: 'home' } },
+      { id: 3, name: 'link 3', to: { name: 'home' } },
+    ];
+
+    const wrapper = mount(Navbar, {
+      props: {
+        menus,
+      },
+      global: {
+        plugins: [
+          createRouter({ history: createWebHistory(), routes }),
+          vclickOutside,
+        ],
+      },
+    });
+
+    const links = wrapper.findAllComponents(RouterLink);
+
+    expect(links).toHaveLength(3);
+    expect(
+      links.map((link) => ({ to: link.props('to'), name: link.text() })),
+    ).toEqual(menus.map((menu) => ({ to: menu.to, name: menu.name })));
   });
 });
