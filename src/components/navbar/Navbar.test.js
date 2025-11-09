@@ -1,16 +1,18 @@
 import { mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
 import Navbar from './Navbar.vue';
-import { createRouter } from 'vue-router';
+import { createRouter, RouterLink } from 'vue-router';
 import { createWebHistory } from 'vue-router';
 import vclickOutside from 'click-outside-vue3';
-import { h } from 'vue';
 import Container from '../container/Container.vue';
 
 const routes = [
   {
     path: '/',
-    component: h('div'),
+    name: 'home',
+    component: {
+      template: '<div></div>',
+    },
   },
 ];
 
@@ -72,7 +74,7 @@ describe.only('Navbar', () => {
     expect(wrapper.find('[data-test="brand"]').exists()).toBe(false);
   });
 
-  test('should hide start menu by default', () => {
+  test('should hide start menu on desktop by default', () => {
     const wrapper = mount(Navbar, {
       global: {
         plugins: [
@@ -85,5 +87,50 @@ describe.only('Navbar', () => {
     expect(wrapper.find('[data-test="start"]').classes()).toContain(
       'sm:hidden',
     );
+  });
+
+  test('should render brand', () => {
+    const wrapper = mount(Navbar, {
+      props: {
+        brand: 'Test',
+        brandRoute: {
+          name: 'home',
+        },
+      },
+      global: {
+        plugins: [
+          createRouter({ history: createWebHistory(), routes }),
+          vclickOutside,
+        ],
+      },
+    });
+
+    const start = wrapper.find('[data-test="start"]');
+    const brand = start.findComponent(RouterLink);
+
+    expect(brand.exists()).toBe(true);
+    expect(brand.props('to')).toEqual({ name: 'home' });
+    expect(brand.text()).toEqual('Test');
+  });
+
+  expect('should display start menu on desktop when brand is exists', () => {
+    const wrapper = mount(Navbar, {
+      props: {
+        brand: 'Test',
+        brandRoute: {
+          name: 'home',
+        },
+      },
+      global: {
+        plugins: [
+          createRouter({ history: createWebHistory(), routes }),
+          vclickOutside,
+        ],
+      },
+    });
+
+    const start = wrapper.find('[data-test="start"]');
+
+    expect(brand.classes()).not.toContain('sm:hidden');
   });
 });
