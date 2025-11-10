@@ -260,4 +260,20 @@ describe.only('Navbar', () => {
 
     expect(wrapper.find('nav').classes()).not.toContain('border-b');
   });
+
+  test('should apply container custom props', () => {
+    const wrapper = mount(Navbar, {
+      props: {
+        containerProps: { maxScreen: 'md' },
+      },
+      global: {
+        plugins: [
+          createRouter({ history: createWebHistory(), routes }),
+          vclickOutside,
+        ],
+      },
+    });
+
+    expect(wrapper.findComponent(Container).props('maxScreen')).toEqual('md');
+  });
 });
