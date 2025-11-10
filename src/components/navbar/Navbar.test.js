@@ -16,7 +16,7 @@ const routes = [
   },
 ];
 
-describe.only('Navbar', () => {
+describe('Navbar', () => {
   test('should render nav', () => {
     const wrapper = mount(Navbar, {
       global: {
@@ -350,5 +350,73 @@ describe.only('Navbar', () => {
         'sm:left-1/2 sm:-translate-x-1/2 sm:absolute'.split(' '),
       ),
     );
+  });
+
+  test('should highlight active menu', () => {
+    const menus = [
+      { id: 1, name: 'link 1', to: { name: 'home' } },
+      { id: 2, name: 'link 2', to: { name: 'home' } },
+      { id: 3, name: 'link 3', to: { name: 'home' } },
+    ];
+
+    const wrapper = mount(Navbar, {
+      props: {
+        menus,
+        activeMenu: 2,
+      },
+      global: {
+        plugins: [
+          createRouter({ history: createWebHistory(), routes }),
+          vclickOutside,
+        ],
+      },
+    });
+
+    const [notActive, active] = wrapper.findAllComponents(RouterLink);
+
+    expect(notActive.classes()).toEqual(
+      expect.arrayContaining(
+        'rounded-md text-gray-900 hover:bg-gray-100 sm:text-gray-900 sm:hover:text-blue-600 sm:hover:bg-transparent'.split(
+          ' ',
+        ),
+      ),
+    );
+    expect(active.classes()).toEqual(
+      expect.arrayContaining(
+        'font-bold rounded-md bg-blue-600 text-white sm:bg-transparent sm:text-blue-600'.split(
+          ' ',
+        ),
+      ),
+    );
+  });
+
+  test('should apply custom  menu class', () => {
+    const menus = [
+      { id: 1, name: 'link 1', to: { name: 'home' } },
+      { id: 2, name: 'link 2', to: { name: 'home' } },
+      { id: 3, name: 'link 3', to: { name: 'home' } },
+    ];
+
+    const wrapper = mount(Navbar, {
+      props: {
+        menus,
+        activeMenu: 2,
+        customClass: {
+          menuDefault: 'text-red-100',
+          menuActive: 'text-green-100',
+        },
+      },
+      global: {
+        plugins: [
+          createRouter({ history: createWebHistory(), routes }),
+          vclickOutside,
+        ],
+      },
+    });
+
+    const [notActive, active] = wrapper.findAllComponents(RouterLink);
+
+    expect(notActive.classes()).toContain('text-red-100');
+    expect(active.classes()).toContain('text-green-100');
   });
 });

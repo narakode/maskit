@@ -10,7 +10,7 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
-  activeMenu: String,
+  activeMenu: null,
   brand: String,
   brandRoute: null,
   bordered: {
