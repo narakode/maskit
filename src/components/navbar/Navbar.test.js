@@ -231,4 +231,33 @@ describe.only('Navbar', () => {
 
     expect(wrapper.html()).toContain('<p>Test</p>');
   });
+
+  test('should bordered by default', () => {
+    const wrapper = mount(Navbar, {
+      global: {
+        plugins: [
+          createRouter({ history: createWebHistory(), routes }),
+          vclickOutside,
+        ],
+      },
+    });
+
+    expect(wrapper.find('nav').classes()).toContain('border-b');
+  });
+
+  test('should not bordered when bordered is false', () => {
+    const wrapper = mount(Navbar, {
+      props: {
+        bordered: false,
+      },
+      global: {
+        plugins: [
+          createRouter({ history: createWebHistory(), routes }),
+          vclickOutside,
+        ],
+      },
+    });
+
+    expect(wrapper.find('nav').classes()).not.toContain('border-b');
+  });
 });
