@@ -313,4 +313,42 @@ describe.only('Navbar', () => {
     expect(mobileSidebar.classes()).not.toContain('-left-full');
     expect(mobileSidebar.classes()).toContain('left-0');
   });
+
+  test('should display menus position in start by default', () => {
+    const wrapper = mount(Navbar, {
+      global: {
+        plugins: [
+          createRouter({ history: createWebHistory(), routes }),
+          vclickOutside,
+        ],
+      },
+    });
+
+    const mobileSidebar = wrapper.find('[data-test="menus"]');
+
+    expect(mobileSidebar.classes()).toContain('sm:static');
+  });
+
+  test('should display menus position in center when menu align is center', () => {
+    const wrapper = mount(Navbar, {
+      props: {
+        menuAlign: 'center',
+      },
+      global: {
+        plugins: [
+          createRouter({ history: createWebHistory(), routes }),
+          vclickOutside,
+        ],
+      },
+    });
+
+    const mobileSidebar = wrapper.find('[data-test="menus"]');
+
+    expect(wrapper.findComponent(Container).classes()).toContain('relative');
+    expect(mobileSidebar.classes()).toEqual(
+      expect.arrayContaining(
+        'sm:left-1/2 sm:-translate-x-1/2 sm:absolute'.split(' '),
+      ),
+    );
+  });
 });

@@ -17,7 +17,7 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  menuAlignHorizontal: {
+  menuAlign: {
     type: String,
     default: 'left',
     validator: (value) => ['left', 'center'].includes(value),
@@ -38,9 +38,9 @@ const mobileSidebarVisible = ref(false);
 
 const menusDynamicPositionClass = computed(() => {
   const baseClass = [
-    props.menuAlignHorizontal === 'center'
-      ? 'sm:left-1/2 sm:-translate-x-1/2'
-      : 'sm:left-0',
+    props.menuAlign === 'center'
+      ? 'sm:left-1/2 sm:-translate-x-1/2 sm:absolute'
+      : 'sm:left-0 sm:static',
   ];
 
   if (mobileSidebarVisible.value) {
@@ -83,7 +83,7 @@ router.afterEach(() => (mobileSidebarVisible.value = false));
     <Container
       :class="[
         'flex items-center justify-between',
-        props.menuAlignHorizontal === 'center' ? 'relative' : '',
+        props.menuAlign === 'center' ? 'relative' : '',
       ]"
       v-bind="containerProps"
     >
@@ -124,9 +124,6 @@ router.afterEach(() => (mobileSidebarVisible.value = false));
           :class="[
             'fixed bg-white top-0 h-screen flex flex-col w-48 z-20 border-r border-gray-300 p-3 transition-all sm:transition-none sm:h-full sm:bg-transparent sm:border-0 sm:h-auto sm:w-auto sm:p-0 sm:flex-row sm:items-center sm:gap-4',
             menusDynamicPositionClass,
-            props.menuAlignHorizontal === 'center'
-              ? 'sm:absolute'
-              : 'sm:static',
           ]"
         >
           <template v-for="menu in menus" :key="menu.id">
