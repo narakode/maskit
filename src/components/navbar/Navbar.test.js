@@ -215,4 +215,20 @@ describe.only('Navbar', () => {
       links.map((link) => ({ to: link.props('to'), name: link.text() })),
     ).toEqual(menus.map((menu) => ({ to: menu.to, name: menu.name })));
   });
+
+  test('should render end slot', () => {
+    const wrapper = mount(Navbar, {
+      slots: {
+        end: '<p>Test</p>',
+      },
+      global: {
+        plugins: [
+          createRouter({ history: createWebHistory(), routes }),
+          vclickOutside,
+        ],
+      },
+    });
+
+    expect(wrapper.html()).toContain('<p>Test</p>');
+  });
 });
