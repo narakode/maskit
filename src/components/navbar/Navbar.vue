@@ -120,6 +120,7 @@ router.afterEach(() => (mobileSidebarVisible.value = false));
         <!-- menus -->
         <div
           v-click-outside="onClickOutsideSidebar"
+          data-test="menus"
           :class="[
             'fixed bg-white top-0 h-screen flex flex-col w-48 z-20 border-r border-gray-300 p-3 transition-all sm:transition-none sm:h-full sm:bg-transparent sm:border-0 sm:h-auto sm:w-auto sm:p-0 sm:flex-row sm:items-center sm:gap-4',
             menusDynamicPositionClass,

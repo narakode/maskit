@@ -276,4 +276,41 @@ describe.only('Navbar', () => {
 
     expect(wrapper.findComponent(Container).props('maxScreen')).toEqual('md');
   });
+
+  test('should hide mobile sidebar menus by default', () => {
+    const wrapper = mount(Navbar, {
+      global: {
+        plugins: [
+          createRouter({ history: createWebHistory(), routes }),
+          vclickOutside,
+        ],
+      },
+    });
+
+    const mobileSidebar = wrapper.find('[data-test="menus"]');
+
+    expect(mobileSidebar.classes()).toContain('-left-full');
+  });
+
+  test('should open mobile sidebar menus when burger button is clicked', async () => {
+    const wrapper = mount(Navbar, {
+      global: {
+        plugins: [
+          createRouter({ history: createWebHistory(), routes }),
+          vclickOutside,
+        ],
+      },
+    });
+
+    const toggleSidebarButton = wrapper.find(
+      'button[aria-label="Toggle Sidebar"',
+    );
+
+    await toggleSidebarButton.trigger('click');
+
+    const mobileSidebar = wrapper.find('[data-test="menus"]');
+
+    expect(mobileSidebar.classes()).not.toContain('-left-full');
+    expect(mobileSidebar.classes()).toContain('left-0');
+  });
 });
