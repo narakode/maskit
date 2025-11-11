@@ -1,29 +1,14 @@
 import { mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
 import Navbar from './Navbar.vue';
-import { createRouter, RouterLink } from 'vue-router';
-import { createWebHistory } from 'vue-router';
 import vclickOutside from 'click-outside-vue3';
 import Container from '../container/Container.vue';
-
-const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: {
-      template: '<div></div>',
-    },
-  },
-];
 
 describe('Navbar', () => {
   test('should render nav', () => {
     const wrapper = mount(Navbar, {
       global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
+        plugins: [vclickOutside],
       },
     });
 
@@ -33,10 +18,7 @@ describe('Navbar', () => {
   test('should render Container', () => {
     const wrapper = mount(Navbar, {
       global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
+        plugins: [vclickOutside],
       },
     });
 
@@ -46,10 +28,7 @@ describe('Navbar', () => {
   test('should render toggle mobile sidebar button', () => {
     const wrapper = mount(Navbar, {
       global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
+        plugins: [vclickOutside],
       },
     });
 
@@ -64,23 +43,73 @@ describe('Navbar', () => {
   test('should not render brand by default', () => {
     const wrapper = mount(Navbar, {
       global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
+        plugins: [vclickOutside],
       },
     });
 
     expect(wrapper.find('[data-test="brand"]').exists()).toBe(false);
   });
 
+  test('should render brand', () => {
+    const wrapper = mount(Navbar, {
+      props: {
+        brand: 'Test',
+      },
+      global: {
+        plugins: [vclickOutside],
+      },
+    });
+
+    const start = wrapper.find('[data-test="start"]');
+    const brand = start.find('[data-test="brand"]');
+
+    expect(brand.exists()).toBe(true);
+    expect(brand.element.tagName).toEqual('A');
+    expect(brand.text()).toEqual('Test');
+  });
+
+  test('should render brand link', () => {
+    const wrapper = mount(Navbar, {
+      props: {
+        brand: 'Test',
+        brandLink: '/home',
+      },
+      global: {
+        plugins: [vclickOutside],
+      },
+    });
+
+    const start = wrapper.find('[data-test="start"]');
+    const brand = start.find('[data-test="brand"]');
+
+    expect(brand.element.getAttribute('href')).toEqual('/home');
+  });
+
+  test('should render brand slot', () => {
+    const wrapper = mount(Navbar, {
+      props: {
+        brand: 'Test',
+        brandLink: '/home',
+      },
+      slots: {
+        brand: '<button>Brand</button>',
+      },
+      global: {
+        plugins: [vclickOutside],
+      },
+    });
+
+    const start = wrapper.find('[data-test="start"]');
+    const brand = start.find('[data-test="brand"]');
+
+    expect(start.html()).toContain('<button>Brand</button>');
+    expect(brand.exists()).toBe(false);
+  });
+
   test('should hide start menu on desktop by default', () => {
     const wrapper = mount(Navbar, {
       global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
+        plugins: [vclickOutside],
       },
     });
 
@@ -89,43 +118,13 @@ describe('Navbar', () => {
     );
   });
 
-  test('should render brand', () => {
-    const wrapper = mount(Navbar, {
-      props: {
-        brand: 'Test',
-        brandRoute: {
-          name: 'home',
-        },
-      },
-      global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
-      },
-    });
-
-    const start = wrapper.find('[data-test="start"]');
-    const brand = start.findComponent(RouterLink);
-
-    expect(brand.exists()).toBe(true);
-    expect(brand.props('to')).toEqual({ name: 'home' });
-    expect(brand.text()).toEqual('Test');
-  });
-
   test('should display start menu on desktop when brand is exists', () => {
     const wrapper = mount(Navbar, {
       props: {
         brand: 'Test',
-        brandRoute: {
-          name: 'home',
-        },
       },
       global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
+        plugins: [vclickOutside],
       },
     });
 
@@ -138,18 +137,12 @@ describe('Navbar', () => {
     const wrapper = mount(Navbar, {
       props: {
         brand: 'Test',
-        brandRoute: {
-          name: 'home',
-        },
       },
       slots: {
         start: '<p>Test</p>',
       },
       global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
+        plugins: [vclickOutside],
       },
     });
 
@@ -159,73 +152,13 @@ describe('Navbar', () => {
     expect(wrapper.html()).toContain('<p>Test</p>');
   });
 
-  test('should render menu links', () => {
-    const menus = [
-      { id: 1, name: 'link 1', href: 'link 1' },
-      { id: 2, name: 'link 2', href: 'link 2' },
-      { id: 3, name: 'link 3', href: 'link 3' },
-    ];
-
-    const wrapper = mount(Navbar, {
-      props: {
-        menus,
-      },
-      global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
-      },
-    });
-
-    const links = wrapper.findAll('a');
-
-    expect(links).toHaveLength(3);
-    expect(
-      links.map((link) => ({
-        href: link.element.getAttribute('href'),
-        name: link.text(),
-      })),
-    ).toEqual(menus.map((menu) => ({ href: menu.href, name: menu.name })));
-  });
-
-  test('should render menu route links', () => {
-    const menus = [
-      { id: 1, name: 'link 1', to: { name: 'home' } },
-      { id: 2, name: 'link 2', to: { name: 'home' } },
-      { id: 3, name: 'link 3', to: { name: 'home' } },
-    ];
-
-    const wrapper = mount(Navbar, {
-      props: {
-        menus,
-      },
-      global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
-      },
-    });
-
-    const links = wrapper.findAllComponents(RouterLink);
-
-    expect(links).toHaveLength(3);
-    expect(
-      links.map((link) => ({ to: link.props('to'), name: link.text() })),
-    ).toEqual(menus.map((menu) => ({ to: menu.to, name: menu.name })));
-  });
-
   test('should render end slot', () => {
     const wrapper = mount(Navbar, {
       slots: {
         end: '<p>Test</p>',
       },
       global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
+        plugins: [vclickOutside],
       },
     });
 
@@ -235,10 +168,7 @@ describe('Navbar', () => {
   test('should bordered by default', () => {
     const wrapper = mount(Navbar, {
       global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
+        plugins: [vclickOutside],
       },
     });
 
@@ -251,10 +181,7 @@ describe('Navbar', () => {
         bordered: false,
       },
       global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
+        plugins: [vclickOutside],
       },
     });
 
@@ -267,10 +194,7 @@ describe('Navbar', () => {
         containerProps: { maxScreen: 'md' },
       },
       global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
+        plugins: [vclickOutside],
       },
     });
 
@@ -280,10 +204,7 @@ describe('Navbar', () => {
   test('should hide mobile sidebar menus by default', () => {
     const wrapper = mount(Navbar, {
       global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
+        plugins: [vclickOutside],
       },
     });
 
@@ -295,10 +216,7 @@ describe('Navbar', () => {
   test('should open mobile sidebar menus when burger button is clicked', async () => {
     const wrapper = mount(Navbar, {
       global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
+        plugins: [vclickOutside],
       },
     });
 
@@ -314,13 +232,37 @@ describe('Navbar', () => {
     expect(mobileSidebar.classes()).toContain('left-0');
   });
 
+  test('should render menu links', () => {
+    const menus = [
+      { id: 1, name: 'link 1', href: 'link 1' },
+      { id: 2, name: 'link 2', href: 'link 2' },
+      { id: 3, name: 'link 3', href: 'link 3' },
+    ];
+
+    const wrapper = mount(Navbar, {
+      props: {
+        menus,
+      },
+      global: {
+        plugins: [vclickOutside],
+      },
+    });
+
+    const links = wrapper.findAll('a');
+
+    expect(links).toHaveLength(3);
+    expect(
+      links.map((link) => ({
+        href: link.element.getAttribute('href'),
+        name: link.text(),
+      })),
+    ).toEqual(menus.map((menu) => ({ href: menu.href, name: menu.name })));
+  });
+
   test('should display menus position in start by default', () => {
     const wrapper = mount(Navbar, {
       global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
+        plugins: [vclickOutside],
       },
     });
 
@@ -335,10 +277,7 @@ describe('Navbar', () => {
         menuAlign: 'center',
       },
       global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
+        plugins: [vclickOutside],
       },
     });
 
@@ -354,9 +293,9 @@ describe('Navbar', () => {
 
   test('should highlight active menu', () => {
     const menus = [
-      { id: 1, name: 'link 1', to: { name: 'home' } },
-      { id: 2, name: 'link 2', to: { name: 'home' } },
-      { id: 3, name: 'link 3', to: { name: 'home' } },
+      { id: 1, name: 'link 1', href: '/' },
+      { id: 2, name: 'link 2', href: '/' },
+      { id: 3, name: 'link 3', href: '/' },
     ];
 
     const wrapper = mount(Navbar, {
@@ -365,14 +304,11 @@ describe('Navbar', () => {
         activeMenu: 2,
       },
       global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
+        plugins: [vclickOutside],
       },
     });
 
-    const [notActive, active] = wrapper.findAllComponents(RouterLink);
+    const [notActive, active] = wrapper.findAll('a');
 
     expect(notActive.classes()).toEqual(
       expect.arrayContaining(
@@ -390,11 +326,11 @@ describe('Navbar', () => {
     );
   });
 
-  test('should apply custom  menu class', () => {
+  test('should apply custom menu class', () => {
     const menus = [
-      { id: 1, name: 'link 1', to: { name: 'home' } },
-      { id: 2, name: 'link 2', to: { name: 'home' } },
-      { id: 3, name: 'link 3', to: { name: 'home' } },
+      { id: 1, name: 'link 1', href: '/' },
+      { id: 2, name: 'link 2', href: '/' },
+      { id: 3, name: 'link 3', href: '/' },
     ];
 
     const wrapper = mount(Navbar, {
@@ -407,16 +343,48 @@ describe('Navbar', () => {
         },
       },
       global: {
-        plugins: [
-          createRouter({ history: createWebHistory(), routes }),
-          vclickOutside,
-        ],
+        plugins: [vclickOutside],
       },
     });
 
-    const [notActive, active] = wrapper.findAllComponents(RouterLink);
+    const [notActive, active] = wrapper.findAll('a');
 
     expect(notActive.classes()).toContain('text-red-100');
     expect(active.classes()).toContain('text-green-100');
+  });
+
+  test('should render menu slot', () => {
+    const menus = [
+      { id: 1, name: 'link 1', href: '/' },
+      { id: 2, name: 'link 2', href: '/' },
+      { id: 3, name: 'link 3', href: '/' },
+    ];
+
+    const wrapper = mount(Navbar, {
+      slots: {
+        menu: `<template #menu="{ menu, classes, isActive }"><button :class="['menu-link', classes.menu, isActive ? 'bg-green-100' : 'bg-red-100']">{{ menu.name }}</button></template>`,
+      },
+      props: {
+        menus,
+        activeMenu: 2,
+        customClass: {
+          menuDefault: 'text-red-100',
+          menuActive: 'text-green-100',
+        },
+      },
+      global: {
+        plugins: [vclickOutside],
+      },
+    });
+
+    const links = wrapper.findAll('.menu-link');
+
+    expect(links).toHaveLength(3);
+    expect(links[0].classes()).toEqual(
+      expect.arrayContaining(['text-red-100', 'bg-red-100']),
+    );
+    expect(links[1].classes()).toEqual(
+      expect.arrayContaining(['text-green-100', 'bg-green-100']),
+    );
   });
 });

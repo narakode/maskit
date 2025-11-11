@@ -15,14 +15,14 @@ Form item adalah komponen untuk mewadahi input atau item pada form yang akan dib
 
 ```vue
 <template>
-  <FormItem label="Nama" v-slot="{ id }">
+  <FormItem label="Nama" id="nama" v-slot="{ id }">
     <Input :id="id" placeholder="Nama" />
   </FormItem>
 </template>
 ```
 
 ::: raw
-<FormItem label="Nama" v-slot="{ id }">
+<FormItem label="Nama" id="nama" v-slot="{ id }">
 <Input :id="id" placeholder="Nama" />
 </FormItem>
 :::

@@ -2,7 +2,6 @@
 import { computed, ref, useTemplateRef } from 'vue';
 import Container from '../container/Container.vue';
 import { Icon } from '@iconify/vue';
-import { RouterLink, useRouter } from 'vue-router';
 
 const props = defineProps({
   containerProps: null,
@@ -12,7 +11,7 @@ const props = defineProps({
   },
   activeMenu: null,
   brand: String,
-  brandRoute: null,
+  brandLink: null,
   bordered: {
     type: Boolean,
     default: true,
@@ -31,11 +30,10 @@ const props = defineProps({
   },
 });
 
-const router = useRouter();
-
 const toggleSidebarButton = useTemplateRef('toggle-button');
 const mobileSidebarVisible = ref(false);
 
+const brandClass = 'font-bold text-lg flex items-center gap-2 lg:text-xl';
 const menusDynamicPositionClass = computed(() => {
   const baseClass = [
     props.menuAlign === 'center'
@@ -69,8 +67,6 @@ function onClickOutsideSidebar(e) {
     mobileSidebarVisible.value = false;
   }
 }
-
-router.afterEach(() => (mobileSidebarVisible.value = false));
 </script>
 
 <template>
@@ -91,7 +87,10 @@ router.afterEach(() => (mobileSidebarVisible.value = false));
         <slot name="start">
           <div
             data-test="start"
-            :class="['flex items-center gap-4', brand ? '' : 'sm:hidden']"
+            :class="[
+              'flex items-center gap-4',
+              brand || $slots.brand ? '' : 'sm:hidden',
+            ]"
           >
             <!-- burger menu -->
             <button
@@ -105,14 +104,16 @@ router.afterEach(() => (mobileSidebarVisible.value = false));
             <!-- end burger menu -->
 
             <!-- brand -->
-            <router-link
-              v-if="brand"
-              :to="brandRoute"
-              data-test="brand"
-              class="font-bold text-lg flex items-center gap-2 lg:text-xl"
-            >
-              {{ brand }}
-            </router-link>
+            <slot name="brand" :classes="{ brand: brandClass }">
+              <a
+                v-if="brand"
+                :href="brandLink"
+                data-test="brand"
+                :class="brandClass"
+              >
+                {{ brand }}
+              </a>
+            </slot>
             <!-- end brand -->
           </div>
         </slot>
@@ -127,16 +128,16 @@ router.afterEach(() => (mobileSidebarVisible.value = false));
           ]"
         >
           <template v-for="menu in menus" :key="menu.id">
-            <RouterLink
-              v-if="menu.to"
-              :to="menu.to"
-              :class="getMenuClass(menu)"
+            <slot
+              name="menu"
+              :menu="menu"
+              :classes="{ menu: getMenuClass(menu) }"
+              :is-active="activeMenu === menu.id"
             >
-              {{ menu.name }}
-            </RouterLink>
-            <a v-else :href="menu.href" :class="getMenuClass(menu)">{{
-              menu.name
-            }}</a>
+              <a :href="menu.href" :class="getMenuClass(menu)">{{
+                menu.name
+              }}</a>
+            </slot>
           </template>
         </div>
         <!-- end menus -->
