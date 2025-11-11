@@ -34,6 +34,7 @@ Dafar item ditambahkan dengan props `data` berupa array. Item ditampilkan dengan
 ```
 
 ::: raw
+<template>
 <List
 :data="[
 { id: 1, name: 'Item 1' },
@@ -41,15 +42,12 @@ Dafar item ditambahkan dengan props `data` berupa array. Item ditampilkan dengan
 { id: 3, name: 'Item 3' },
 { id: 4, name: 'Item 4' },
 { id: 5, name: 'Item 5' }
-]"
-
->
-
-    <template #item="{ item }">
-        {{ item.name }}
-    </template>
-
+]">
+<template #item="{ item }">
+{{ item.name }}
+</template>
 </List>
+</template>
 :::
 
 ## Menambahkan Header
@@ -58,7 +56,7 @@ Untuk menambahkan header, gunakan slot `header`.
 
 Slot ini menerima objek `classes` untuk [styling](#styling-list).
 
-```vue
+```vue{11-15}
 <template>
   <List
     :data="[
@@ -89,19 +87,16 @@ Slot ini menerima objek `classes` untuk [styling](#styling-list).
 { id: 3, name: 'Item 3' },
 { id: 4, name: 'Item 4' },
 { id: 5, name: 'Item 5' }
-]"
+]">
+<template #header="{ classes }">
 
->
-
-    <template #header="{ classes }">
-        <header :class="classes.item">
-            <h2 class="font-bold text-lg">Judul</h2>
-        </header>
-    </template>
-    <template #item="{ item }">
-        {{ item.name }}
-    </template>
-
+<header :class="classes.item">
+<h2 class="font-bold text-lg">Judul</h2>
+</header>
+</template>
+<template #item="{ item }">
+{{ item.name }}
+</template>
 </List>
 :::
 
@@ -111,7 +106,7 @@ Untuk menambahkan footer, gunakan slot `footer`.
 
 Slot ini menerima objek `classes` untuk [styling](#styling-list).
 
-```vue
+```vue{14-18}
 <template>
   <List
     :data="[
@@ -142,18 +137,16 @@ Slot ini menerima objek `classes` untuk [styling](#styling-list).
 { id: 3, name: 'Item 3' },
 { id: 4, name: 'Item 4' },
 { id: 5, name: 'Item 5' }
-]"
+]">
+<template #item="{ item }">
+{{ item.name }}
+</template>
+<template #footer="{ classes }">
 
->
-
-    <template #item="{ item }">
-        {{ item.name }}
-    </template>
-    <template #footer="{ classes }">
-        <footer :class="classes.item">
-            <Button>Simpan</Button>
-        </footer>
-    </template>
+<footer :class="classes.item">
+<Button>Simpan</Button>
+</footer>
+</template>
 
 </List>
 :::
@@ -162,7 +155,7 @@ Slot ini menerima objek `classes` untuk [styling](#styling-list).
 
 Untuk menambahkan hover pada item, tambahkan props `hoverable`.
 
-```vue
+```vue{3}
 <template>
   <List
     hoverable
@@ -190,14 +183,10 @@ hoverable
 { id: 3, name: 'Item 3' },
 { id: 4, name: 'Item 4' },
 { id: 5, name: 'Item 5' }
-]"
-
->
-
-    <template #item="{ item }">
-        {{ item.name }}
-    </template>
-
+]">
+<template #item="{ item }">
+{{ item.name }}
+</template>
 </List>
 :::
 
@@ -205,7 +194,7 @@ hoverable
 
 Untuk mengubah ukuran item, tambahkan props `size` dengan nilai `sm/md/lg`. Default `md`.
 
-```vue
+```vue{3}
 <template>
   <List
     size="sm"
@@ -235,20 +224,17 @@ size="sm"
 { id: 5, name: 'Item 5' }
 ]"
 
->
-
-    <template #item="{ item }">
-        {{ item.name }}
-    </template>
-
-</List>
-:::
+> <template #item="{ item }">
+> {{ item.name }}
+> </template>
+> </List>
+> :::
 
 ## Menonaktifkan Divider
 
 Untuk menonaktifkan divider, tambahkan props `striped` dengan nilai `false`.
 
-```vue
+```vue{3}
 <template>
   <List
     :striped="false"
@@ -276,14 +262,10 @@ Untuk menonaktifkan divider, tambahkan props `striped` dengan nilai `false`.
 { id: 3, name: 'Item 3' },
 { id: 4, name: 'Item 4' },
 { id: 5, name: 'Item 5' }
-]"
-
->
-
-    <template #item="{ item }">
-        {{ item.name }}
-    </template>
-
+]">
+<template #item="{ item }">
+{{ item.name }}
+</template>
 </List>
 :::
 
