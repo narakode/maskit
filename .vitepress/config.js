@@ -31,6 +31,7 @@ export default defineConfig({
           { text: 'Input', link: '/components/input' },
           { text: 'List', link: '/components/list' },
           { text: 'Modal', link: '/components/modal' },
+          { text: 'Navbar', link: '/components/navbar' },
           { text: 'Pagination', link: '/components/pagination' },
           { text: 'Radio', link: '/components/radio' },
           { text: 'Skeleton', link: '/components/skeleton' },
