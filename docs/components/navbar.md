@@ -46,13 +46,11 @@ brand-link="/"
 { id: 'home', href: '/', name: 'Beranda' },
 { id: 'about', href: '/about', name: 'Tentang' },
 { id: 'contact', href: '/contact', name: 'Kontak' }
-]"
+]">
 
->
-
-    <template #end>
-        <Button color="primary">Login</Button>
-    </template>
+<template #end>
+<Button color="primary">Login</Button>
+</template>
 
 </Navbar>
 :::
@@ -89,13 +87,11 @@ brand-link="/"
 { id: 'about', href: '/about', name: 'Tentang' },
 { id: 'contact', href: '/contact', name: 'Kontak' }
 ]"
-menu-align="center"
+menu-align="center">
 
->
-
-    <template #end>
-        <Button color="primary">Login</Button>
-    </template>
+<template #end>
+<Button color="primary">Login</Button>
+</template>
 
 </Navbar>
 :::
@@ -132,13 +128,11 @@ brand-link="/"
 { id: 'about', href: '/about', name: 'Tentang' },
 { id: 'contact', href: '/contact', name: 'Kontak' }
 ]"
-active-menu="about"
+active-menu="about">
 
->
-
-    <template #end>
-        <Button color="primary">Login</Button>
-    </template>
+<template #end>
+<Button color="primary">Login</Button>
+</template>
 
 </Navbar>
 :::
@@ -169,13 +163,11 @@ Brand bukanlah props yang wajib ada, jika tidak ada, maka brand tidak akan ditam
 { id: 'home', href: '/', name: 'Beranda' },
 { id: 'about', href: '/about', name: 'Tentang' },
 { id: 'contact', href: '/contact', name: 'Kontak' }
-]"
+]">
 
->
-
-    <template #end>
-        <Button color="primary">Login</Button>
-    </template>
+<template #end>
+<Button color="primary">Login</Button>
+</template>
 
 </Navbar>
 :::
@@ -212,13 +204,11 @@ Di dalam navbar terdapat komponen [Container](/components/container). Untuk meng
 { id: 'home', href: '/', name: 'Beranda' },
 { id: 'about', href: '/about', name: 'Tentang' },
 { id: 'contact', href: '/contact', name: 'Kontak' }
-]"
+]">
 
->
-
-    <template #end>
-        <Button color="primary">Login</Button>
-    </template>
+<template #end>
+<Button color="primary">Login</Button>
+</template>
 
 </Navbar>
 :::
@@ -252,16 +242,14 @@ Brand default dirender dalam bentuk link, untuk mengubahnya, tambahkan slot `bra
 { id: 'home', href: '/', name: 'Beranda' },
 { id: 'about', href: '/about', name: 'Tentang' },
 { id: 'contact', href: '/contact', name: 'Kontak' }
-]"
+]">
 
->
-
-    <template #brand>
-        <Button>Brand</Button>
-    </template>
-    <template #end>
-        <Button color="primary">Login</Button>
-    </template>
+<template #brand>
+<Button>Brand</Button>
+</template>
+<template #end>
+<Button color="primary">Login</Button>
+</template>
 
 </Navbar>
 :::
@@ -305,13 +293,11 @@ active-menu="contact"
 { id: 'home', href: '/', name: 'Beranda' },
 { id: 'about', href: '/about', name: 'Tentang' },
 { id: 'contact', href: '/contact', name: 'Kontak' }
-]"
+]">
 
->
-
-    <template #end>
-        <Button color="primary">Login</Button>
-    </template>
+<template #end>
+<Button color="primary">Login</Button>
+</template>
 
 </Navbar>
 :::
@@ -348,13 +334,11 @@ active-menu="contact"
 { id: 'home', href: '/', name: 'Beranda' },
 { id: 'about', href: '/about', name: 'Tentang' },
 { id: 'contact', href: '/contact', name: 'Kontak' }
-]"
+]">
 
->
-
-    <template #menu="{ menu, isActive }">
-        <Button :color="isActive ? 'primary' : 'light'">{{ menu.name }}</Button>
-    </template>
+<template #menu="{ menu, isActive }">
+<Button :color="isActive ? 'primary' : 'light'">{{ menu.name }}</Button>
+</template>
 
 </Navbar>
 :::
