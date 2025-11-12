@@ -352,7 +352,7 @@ active-menu="contact"
 | `brand-link`      | `string`                                      | :x:    | `''`                                  | Link brand                    |
 | `active-menu`     | `string`                                      | :x:    | `null`                                | Id menu yang sedang aktif     |
 | `menu-align`      | `enum('left', 'center')`                      | :x:    | `left`                                | Posisi menu secara horizontal |
-| `bordered`        | `bordered`                                    | :x:    | `true`                                | Ada border bottom di navbar   |
+| `bordered`        | `boolean`                                     | :x:    | `true`                                | Ada border bottom di navbar   |
 | `custom-class`    | `{ menuDefault: string, menuActive: string }` | :x:    | `{ menuDefault: '', menuActive: '' }` | Custom class ke menu          |
 | `container-props` | `{}`                                          | :x:    | `{}`                                  | Custom props container        |
 
