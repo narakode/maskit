@@ -34,6 +34,7 @@ export default defineConfig({
           { text: 'Navbar', link: '/components/navbar' },
           { text: 'Pagination', link: '/components/pagination' },
           { text: 'Radio', link: '/components/radio' },
+          { text: 'Section', link: '/components/section' },
           { text: 'Skeleton', link: '/components/skeleton' },
           { text: 'Spinner', link: '/components/spinner' },
         ],
