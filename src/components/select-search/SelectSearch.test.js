@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { describe, expect, test } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 import SelectSearch from './SelectSearch.vue';
 import Input from '../input/Input.vue';
 import { MotionPlugin } from '@vueuse/motion';
@@ -39,6 +39,25 @@ describe('SelectSearch', () => {
     expect(input.element.getAttribute('placeholder')).toEqual('Test');
     expect(input.element.getAttribute('required')).toEqual('');
   });
+
+  test('should update search prop when input changed', async () => {
+    const mock = vi.fn();
+    const wrapper = mount(SelectSearch, {
+      props: {
+        search: 'test',
+        'onUpdate:search': mock,
+      },
+      global: { plugins },
+    });
+
+    wrapper.find('input').setValue('update');
+
+    await wrapper.find('input').trigger('change');
+
+    expect(mock).toHaveBeenCalledWith('update');
+  });
+
+  test.skip('should open dropdown when input focused');
 
   test('should not render Spinner by default', () => {
     const wrapper = mount(SelectSearch, {
@@ -98,4 +117,52 @@ describe('SelectSearch', () => {
     expect(clearIcon.exists()).toBe(true);
     expect(clearIcon.props('icon')).toEqual('tabler:x');
   });
+
+  describe('when clear button clicked', () => {
+    test.skip('should clear selected');
+    test.skip('should hide dropdown');
+    test.skip('should emit change');
+  });
+
+  describe('when dropdown opened', () => {
+    test.skip('should emit scroll-bottom when scroll reached bottom');
+    test.skip('should emit opened');
+
+    describe('when data is empty', () => {
+      test.skip('should render empty message');
+
+      describe('when with create button is true', () => {
+        test.skip('should not render empty message');
+        test.skip('should render create button');
+
+        describe('when create button clicked', () => {
+          test.skip('should emit create-empty-search-item');
+          test.skip('should hide dropdown');
+        });
+      });
+    });
+
+    test.skip('should render data item');
+    test.skip('should render slot item when exists');
+    test.skip('should not highlight data item by default');
+    test.skip('should highlight data item when hovered');
+
+    describe('when data item clicked', () => {
+      test.skip('should update selected');
+      test.skip('should hide dropdown');
+      test.skip('should emit change');
+    });
+  });
+
+  describe('when dropdown closed', () => {
+    test.skip('should update search when any selected');
+    test.skip('should reset search when no selected');
+  });
+
+  describe('when selected updated', () => {
+    test.skip('should update search when any selected');
+    test.skip('should reset search when no selected');
+  });
+
+  test.skip('should update search by selected name when created');
 });
