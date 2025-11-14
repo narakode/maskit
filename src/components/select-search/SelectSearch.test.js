@@ -119,9 +119,46 @@ describe('SelectSearch', () => {
   });
 
   describe('when clear button clicked', () => {
-    test.skip('should clear selected');
+    test('should clear selected', async () => {
+      const wrapper = mount(SelectSearch, {
+        props: {
+          modelValue: {
+            id: 1,
+            name: 'Test',
+          },
+          'onUpdate:modelValue': (e) => wrapper.setProps({ modelValue: e }),
+        },
+        global: {
+          plugins,
+        },
+      });
+
+      const clearBtn = wrapper.find('[aria-label="Clear selected"]');
+
+      await clearBtn.trigger('click');
+
+      expect(wrapper.props('modelValue')).toBeNull();
+    });
     test.skip('should hide dropdown');
-    test.skip('should emit change');
+    test.only('should emit change', () => {
+      const wrapper = mount(SelectSearch, {
+        props: {
+          modelValue: {
+            id: 1,
+            name: 'Test',
+          },
+        },
+        global: {
+          plugins,
+        },
+      });
+
+      const clearBtn = wrapper.find('[aria-label="Clear selected"]');
+
+      clearBtn.trigger('click');
+
+      expect(wrapper.emitted()).toHaveProperty('change');
+    });
   });
 
   describe('when dropdown opened', () => {
