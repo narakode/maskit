@@ -180,6 +180,7 @@ watch(visible, (newVisible) => {
       v-if="visible"
       ref="items-wrapper"
       v-motion-slide-top
+      data-test="dropdown"
       class="bg-white rounded-md border border-gray-300 absolute w-full z-10 mt-2.5 py-1 max-h-[200px] overflow-y-auto"
       tabindex="-1"
       @scroll="onScrollWrapper"

@@ -57,7 +57,15 @@ describe('SelectSearch', () => {
     expect(mock).toHaveBeenCalledWith('update');
   });
 
-  test.skip('should open dropdown when input focused');
+  test('should open dropdown when input focused', async () => {
+    const wrapper = mount(SelectSearch, {
+      global: { plugins },
+    });
+
+    await wrapper.find('input').trigger('focus');
+
+    expect(wrapper.find('[data-test="dropdown"]').exists()).toBe(true);
+  });
 
   test('should not render Spinner by default', () => {
     const wrapper = mount(SelectSearch, {
@@ -139,8 +147,7 @@ describe('SelectSearch', () => {
 
       expect(wrapper.props('modelValue')).toBeNull();
     });
-    test.skip('should hide dropdown');
-    test.only('should emit change', () => {
+    test('should emit change', () => {
       const wrapper = mount(SelectSearch, {
         props: {
           modelValue: {
@@ -159,6 +166,37 @@ describe('SelectSearch', () => {
 
       expect(wrapper.emitted()).toHaveProperty('change');
     });
+
+    test('should hide dropdown', async () => {
+      const wrapper = mount(SelectSearch, {
+        props: {
+          modelValue: {
+            id: 1,
+            name: 'Test',
+          },
+        },
+        global: {
+          plugins,
+        },
+      });
+
+      const clearBtn = wrapper.find('[aria-label="Clear selected"]');
+
+      await wrapper.find('input').trigger('focus');
+      await clearBtn.trigger('click');
+
+      expect(wrapper.find('[data-test="dropdown"]').exists()).toBe(false);
+    });
+  });
+
+  test('should not render dropdown by default', () => {
+    const wrapper = mount(SelectSearch, {
+      global: {
+        plugins,
+      },
+    });
+
+    expect(wrapper.find('[data-test="dropdown"]').exists()).toBe(false);
   });
 
   describe('when dropdown opened', () => {
