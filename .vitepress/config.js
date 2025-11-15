@@ -36,6 +36,7 @@ export default defineConfig({
           { text: 'Radio', link: '/components/radio' },
           { text: 'Section', link: '/components/section' },
           { text: 'Select', link: '/components/select' },
+          { text: 'Select Search', link: '/components/select-search' },
           { text: 'Skeleton', link: '/components/skeleton' },
           { text: 'Spinner', link: '/components/spinner' },
         ],

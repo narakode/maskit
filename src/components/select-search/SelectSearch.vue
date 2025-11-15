@@ -12,6 +12,7 @@ const props = defineProps({
   placeholder: String,
   withCreateButton: Boolean,
   required: Boolean,
+  loading: Boolean,
 });
 const emit = defineEmits([
   'opened',
@@ -28,7 +29,6 @@ const searchInput = useTemplateRef('search-input');
 const currentHoverItem = ref(null);
 const selected = defineModel();
 const search = defineModel('search');
-const loading = defineModel('loading');
 
 function scrollItemVisibility() {
   const container = itemsWrapper.value;
