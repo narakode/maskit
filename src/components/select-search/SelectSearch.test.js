@@ -305,8 +305,7 @@ describe('SelectSearch', () => {
             });
 
             await wrapper.find('input').trigger('focus');
-
-            wrapper.find('a').trigger('click');
+            await wrapper.find('a').trigger('click');
 
             expect(wrapper.find('[data-test="dropdown"]').exists()).toBe(false);
           });
@@ -448,7 +447,7 @@ describe('SelectSearch', () => {
 
         expect(wrapper.find('[data-test="dropdown"]').exists()).toBe(false);
       });
-      test.only('should emit change', async () => {
+      test('should emit change', async () => {
         const items = Array.from({ length: 3 }, (_, i) => ({
           id: i + 1,
           name: `Option ${i + 1}`,
@@ -504,7 +503,7 @@ describe('SelectSearch', () => {
 
       expect(onUpdate).toHaveBeenLastCalledWith(items[1].name);
     });
-    test.only('should reset search when no selected', async () => {
+    test('should reset search when no selected', async () => {
       const onUpdate = vi.fn();
       const items = Array.from({ length: 3 }, (_, i) => ({
         id: i + 1,
@@ -533,10 +532,22 @@ describe('SelectSearch', () => {
     });
   });
 
-  describe('when selected updated', () => {
-    test.skip('should update search when any selected');
-    test.skip('should reset search when no selected');
-  });
+  test('should update search by selected name when created', async () => {
+    const onUpdate = vi.fn();
+    const items = Array.from({ length: 3 }, (_, i) => ({
+      id: i + 1,
+      name: `Option ${i + 1}`,
+    }));
+    const wrapper = mount(SelectSearch, {
+      props: {
+        items,
+        modelValue: items[1],
+        'onUpdate:search': onUpdate,
+      },
+      global: { plugins },
+    });
 
-  test.skip('should update search by selected name when created');
+    expect(onUpdate).toHaveBeenCalled();
+    expect(onUpdate).toHaveBeenLastCalledWith(items[1].name);
+  });
 });
