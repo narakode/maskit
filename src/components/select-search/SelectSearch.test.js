@@ -388,9 +388,6 @@ describe('SelectSearch', () => {
         props: {
           items,
         },
-        slots: {
-          item: '<template #item="{ item }">{{ item.id }} - {{ item.name }}</template>',
-        },
         global: { plugins },
       });
 
@@ -405,9 +402,75 @@ describe('SelectSearch', () => {
     });
 
     describe('when data item clicked', () => {
-      test.skip('should update selected');
-      test.skip('should hide dropdown');
-      test.skip('should emit change');
+      test('should update selected', async () => {
+        const items = Array.from({ length: 3 }, (_, i) => ({
+          id: i + 1,
+          name: `Option ${i + 1}`,
+        }));
+        const wrapper = mount(SelectSearch, {
+          props: {
+            items,
+            modelValue: null,
+            'onUpdate:modelValue': (e) => wrapper.setProps({ modelValue: e }),
+          },
+          global: { plugins },
+        });
+
+        await wrapper.find('input').trigger('focus');
+
+        const dropdown = wrapper.find('[data-test="dropdown"]');
+        const itemsDiv = dropdown.findAll('div');
+
+        await itemsDiv[1].trigger('click');
+
+        expect(wrapper.props('modelValue')).toEqual(items[1]);
+      });
+      test('should hide dropdown', async () => {
+        const items = Array.from({ length: 3 }, (_, i) => ({
+          id: i + 1,
+          name: `Option ${i + 1}`,
+        }));
+        const wrapper = mount(SelectSearch, {
+          props: {
+            items,
+            modelValue: null,
+            'onUpdate:modelValue': (e) => wrapper.setProps({ modelValue: e }),
+          },
+          global: { plugins },
+        });
+
+        await wrapper.find('input').trigger('focus');
+
+        const dropdown = wrapper.find('[data-test="dropdown"]');
+        const itemsDiv = dropdown.findAll('div');
+
+        await itemsDiv[1].trigger('click');
+
+        expect(wrapper.find('[data-test="dropdown"]').exists()).toBe(false);
+      });
+      test.only('should emit change', async () => {
+        const items = Array.from({ length: 3 }, (_, i) => ({
+          id: i + 1,
+          name: `Option ${i + 1}`,
+        }));
+        const wrapper = mount(SelectSearch, {
+          props: {
+            items,
+            modelValue: null,
+            'onUpdate:modelValue': (e) => wrapper.setProps({ modelValue: e }),
+          },
+          global: { plugins },
+        });
+
+        await wrapper.find('input').trigger('focus');
+
+        const dropdown = wrapper.find('[data-test="dropdown"]');
+        const itemsDiv = dropdown.findAll('div');
+
+        await itemsDiv[1].trigger('click');
+
+        expect(wrapper.emitted()).toHaveProperty('change');
+      });
     });
   });
 
