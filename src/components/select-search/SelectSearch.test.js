@@ -200,19 +200,116 @@ describe('SelectSearch', () => {
   });
 
   describe('when dropdown opened', () => {
-    test.skip('should emit scroll-bottom when scroll reached bottom');
-    test.skip('should emit opened');
+    test('should emit opened', async () => {
+      const wrapper = mount(SelectSearch, {
+        global: { plugins },
+      });
+
+      await wrapper.find('input').trigger('focus');
+
+      expect(wrapper.emitted()).toHaveProperty('opened');
+    });
 
     describe('when data is empty', () => {
-      test.skip('should render empty message');
+      test('should render empty message', async () => {
+        const wrapper = mount(SelectSearch, {
+          global: { plugins },
+        });
+
+        await wrapper.find('input').trigger('focus');
+
+        const p = wrapper.find('p');
+
+        expect(p.exists()).toBe(true);
+        expect(p.text()).toEqual('No results found');
+      });
 
       describe('when with create button is true', () => {
-        test.skip('should not render empty message');
-        test.skip('should render create button');
+        test('should render empty message when search is null', async () => {
+          const wrapper = mount(SelectSearch, {
+            props: {
+              withCreateButton: true,
+            },
+            global: { plugins },
+          });
+
+          await wrapper.find('input').trigger('focus');
+
+          expect(wrapper.find('p').exists()).toBe(true);
+        });
+        test('should not render empty message when search exists', async () => {
+          const wrapper = mount(SelectSearch, {
+            props: {
+              withCreateButton: true,
+              modelValue: {
+                id: 1,
+                name: 'test',
+              },
+            },
+            global: { plugins },
+          });
+
+          await wrapper.find('input').trigger('focus');
+
+          expect(wrapper.find('p').exists()).toBe(false);
+        });
+        test('should render create button', async () => {
+          const wrapper = mount(SelectSearch, {
+            props: {
+              withCreateButton: true,
+              modelValue: {
+                id: 1,
+                name: 'test',
+              },
+            },
+            global: { plugins },
+          });
+
+          await wrapper.find('input').trigger('focus');
+
+          const createBtn = wrapper.find('a');
+
+          expect(createBtn.exists()).toBe(true);
+          expect(createBtn.text()).toEqual(`Add "test" as new item`);
+        });
 
         describe('when create button clicked', () => {
-          test.skip('should emit create-empty-search-item');
-          test.skip('should hide dropdown');
+          test('should emit create-empty-search-item', async () => {
+            const wrapper = mount(SelectSearch, {
+              props: {
+                withCreateButton: true,
+                modelValue: {
+                  id: 1,
+                  name: 'test',
+                },
+              },
+              global: { plugins },
+            });
+
+            await wrapper.find('input').trigger('focus');
+
+            wrapper.find('a').trigger('click');
+
+            expect(wrapper.emitted()).toHaveProperty(`create`);
+          });
+          test('should hide dropdown', async () => {
+            const wrapper = mount(SelectSearch, {
+              props: {
+                withCreateButton: true,
+                modelValue: {
+                  id: 1,
+                  name: 'test',
+                },
+              },
+              global: { plugins },
+            });
+
+            await wrapper.find('input').trigger('focus');
+
+            wrapper.find('a').trigger('click');
+
+            expect(wrapper.find('[date-test="dropdown"]').exists()).toBe(false);
+          });
         });
       });
     });
@@ -221,6 +318,7 @@ describe('SelectSearch', () => {
     test.skip('should render slot item when exists');
     test.skip('should not highlight data item by default');
     test.skip('should highlight data item when hovered');
+    test.skip('should emit scroll-bottom when scroll reached bottom', () => {});
 
     describe('when data item clicked', () => {
       test.skip('should update selected');

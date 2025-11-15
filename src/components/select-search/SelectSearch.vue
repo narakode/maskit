@@ -10,14 +10,14 @@ const props = defineProps({
     default: () => [],
   },
   placeholder: String,
-  withSearchEmptyCreate: Boolean,
+  withCreateButton: Boolean,
   required: Boolean,
 });
 const emit = defineEmits([
   'opened',
   'search-debounce',
   'scroll-bottom',
-  'create-empty-search-item',
+  'create',
   'change',
 ]);
 
@@ -122,7 +122,7 @@ function onScrollWrapper(e) {
   }
 }
 function onCreateEmptySearchItem() {
-  emit('create-empty-search-item');
+  emit('create');
 
   visible.value = false;
 }
@@ -186,13 +186,13 @@ watch(visible, (newVisible) => {
       @scroll="onScrollWrapper"
     >
       <p
-        v-if="!items.length && (withSearchEmptyCreate ? !search : true)"
+        v-if="!items.length && (withCreateButton ? !search : true)"
         class="px-3 py-2 text-gray-700 text-center"
       >
         No results found
       </p>
       <a
-        v-else-if="!items.length && search && withSearchEmptyCreate"
+        v-else-if="!items.length && search && withCreateButton"
         class="px-3 py-2 text-gray-700 text-center flex items-center justify-center gap-2 cursor-pointer"
         @click.prevent="onCreateEmptySearchItem"
       >
