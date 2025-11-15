@@ -475,8 +475,62 @@ describe('SelectSearch', () => {
   });
 
   describe('when dropdown closed', () => {
-    test.skip('should update search when any selected');
-    test.skip('should reset search when no selected');
+    test('should update search when any selected', async () => {
+      const onUpdate = vi.fn();
+      const items = Array.from({ length: 3 }, (_, i) => ({
+        id: i + 1,
+        name: `Option ${i + 1}`,
+      }));
+      const wrapper = mount(SelectSearch, {
+        props: {
+          items,
+          modelValue: items[1],
+          'onUpdate:search': onUpdate,
+        },
+        global: { plugins },
+      });
+
+      const input = wrapper.find('input');
+
+      await input.trigger('focus');
+
+      const dropdown = wrapper.find('[data-test="dropdown"]');
+      const itemsDiv = dropdown.findAll('div');
+
+      input.setValue('test');
+
+      await input.trigger('change');
+      await itemsDiv[1].trigger('click');
+
+      expect(onUpdate).toHaveBeenLastCalledWith(items[1].name);
+    });
+    test.only('should reset search when no selected', async () => {
+      const onUpdate = vi.fn();
+      const items = Array.from({ length: 3 }, (_, i) => ({
+        id: i + 1,
+        name: `Option ${i + 1}`,
+      }));
+      const wrapper = mount(SelectSearch, {
+        props: {
+          items,
+          modelValue: items[1],
+          'onUpdate:search': onUpdate,
+        },
+        global: { plugins },
+      });
+
+      const input = wrapper.find('input');
+
+      await input.trigger('focus');
+
+      input.setValue('test');
+
+      await input.trigger('change');
+
+      await wrapper.find('button').trigger('click');
+
+      expect(onUpdate).toHaveBeenLastCalledWith(null);
+    });
   });
 
   describe('when selected updated', () => {
