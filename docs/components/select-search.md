@@ -256,9 +256,8 @@ Opsi dropdown bisa dicustom tampilannya dengan slot `item`. Slot ini menerima pa
 { id: 2, name: 'Silver', detail: 'Terbaik' },
 { id: 3, name: 'Gold', detail: 'Business Class' }
 ]"
-placeholder="Pilih Paket"
-
-> <template #item="{ item }">
+placeholder="Pilih Paket">
+<template #item="{ item }">
 
 <p>
 <strong>{{ item.name }}</strong>
