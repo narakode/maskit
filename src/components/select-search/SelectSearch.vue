@@ -16,7 +16,7 @@ const props = defineProps({
 });
 const emit = defineEmits([
   'opened',
-  'search-debounce',
+  'search',
   'scroll-bottom',
   'create',
   'change',
@@ -111,7 +111,7 @@ function onClear() {
 }
 function onSearchDebounce() {
   currentHoverItem.value = null;
-  emit('search-debounce');
+  emit('search');
 }
 function onScrollWrapper(e) {
   const scroll = e.target.scrollTop + e.target.clientHeight;

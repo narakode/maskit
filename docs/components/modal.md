@@ -153,7 +153,7 @@ Ada tiga kustomisasi yang bisa dilakukan:
 1. Props `with-container`, untuk menonaktifkan container di dalam modal.
 2. Props `container-props`, untuk mengirimkan custom props ke container.
 3. Props `card-props`, untuk mengirimkan custom props ke card.
-4. Props `custom-class`, untuk menambahkan class ke elemen di dalam modal, bentuknya objek, propertinya `card` untuk menambahkan class ke card..
+4. Props `custom-class`, untuk menambahkan class ke elemen di dalam modal, bentuknya objek, propertinya `card` untuk menambahkan class ke card.
 
 ## Props
 
