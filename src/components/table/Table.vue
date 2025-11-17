@@ -1,14 +1,14 @@
 <script setup>
-import Spinner from './Spinner.vue';
+import Spinner from '../spinner/Spinner.vue';
 
 defineProps({
   columns: {
     type: Array,
-    required: true,
+    default: () => [],
   },
   data: {
     type: Array,
-    required: true,
+    default: () => [],
   },
   loading: Boolean,
   hoverable: {
@@ -63,7 +63,7 @@ const classes = {
         <slot name="td" :item="item" :index="index" :classes="classes" />
       </tr>
     </tbody>
-    <tfoot>
+    <tfoot v-if="$slots.footer">
       <slot name="footer" :classes="classes" />
     </tfoot>
   </table>
