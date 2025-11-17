@@ -16,7 +16,7 @@ const props = defineProps({
 
 function getMenuClass(menu) {
   return [
-    'flex items-center gap-2 px-4 py-2.5 rounded-lg',
+    'flex items-center gap-2 px-4 py-2.5 rounded-lg w-full',
     props.activeMenu === menu.id
       ? 'bg-blue-600 font-bold'
       : 'hover:bg-gray-600',
@@ -42,7 +42,7 @@ function getMenuClass(menu) {
         <slot
           name="menu"
           :menu="menu"
-          :classes="getMenuClass(menu)"
+          :classes="{ menu: getMenuClass(menu) }"
           :is-active="menu.id === activeMenu"
         >
           <a href="" :class="getMenuClass(menu)">

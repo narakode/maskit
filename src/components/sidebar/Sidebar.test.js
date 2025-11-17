@@ -57,7 +57,7 @@ describe('Sidebar', () => {
         menus: [
           { id: 'dashboard', name: 'Dashboard', icon: 'tabler:dashboard' },
           { id: 'product', name: 'Product', icon: 'tabler:archive' },
-          { id: 'setting', name: 'Setting', icon: 'tabler:setting' },
+          { id: 'setting', name: 'Setting', icon: 'tabler:settings' },
         ],
       },
     });
@@ -87,7 +87,7 @@ describe('Sidebar', () => {
         menus: [
           { id: 'dashboard', name: 'Dashboard', icon: 'tabler:dashboard' },
           { id: 'product', name: 'Product', icon: 'tabler:archive' },
-          { id: 'setting', name: 'Setting', icon: 'tabler:setting' },
+          { id: 'setting', name: 'Setting', icon: 'tabler:settings' },
         ],
       },
     });
@@ -103,7 +103,7 @@ describe('Sidebar', () => {
         menus: [
           { id: 'dashboard', name: 'Dashboard', icon: 'tabler:dashboard' },
           { id: 'product', name: 'Product', icon: 'tabler:archive' },
-          { id: 'setting', name: 'Setting', icon: 'tabler:setting' },
+          { id: 'setting', name: 'Setting', icon: 'tabler:settings' },
         ],
         activeMenu: 'setting',
       },
@@ -122,7 +122,7 @@ describe('Sidebar', () => {
         menus: [
           { id: 'dashboard', name: 'Dashboard', icon: 'tabler:dashboard' },
           { id: 'product', name: 'Product', icon: 'tabler:archive' },
-          { id: 'setting', name: 'Setting', icon: 'tabler:setting' },
+          { id: 'setting', name: 'Setting', icon: 'tabler:settings' },
         ],
         activeMenu: 'setting',
       },
