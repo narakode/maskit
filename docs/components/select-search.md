@@ -228,7 +228,7 @@ v-model:search="search3"
 
 Opsi dropdown bisa dicustom tampilannya dengan slot `item`. Slot ini menerima payload `item` berupa objek opsi yang sedang ditampilkan.
 
-```vue{24,27}
+```vue{10-16}
 <template>
     <SelectSearch
         :items="[

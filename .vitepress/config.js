@@ -37,6 +37,7 @@ export default defineConfig({
           { text: 'Section', link: '/components/section' },
           { text: 'Select', link: '/components/select' },
           { text: 'Select Search', link: '/components/select-search' },
+          { text: 'Sidebar', link: '/components/sidebar' },
           { text: 'Skeleton', link: '/components/skeleton' },
           { text: 'Spinner', link: '/components/spinner' },
         ],
