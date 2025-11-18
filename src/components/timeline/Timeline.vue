@@ -2,7 +2,7 @@
 defineProps({
   items: {
     type: Array,
-    required: true,
+    default: () => [],
   },
 });
 </script>
@@ -19,10 +19,14 @@ defineProps({
       <time class="mb-1 text-sm font-normal leading-none text-gray-400">
         {{ item.time }}</time
       >
-      <p class="font-bold text-gray-900 lg:text-lg">
+      <p data-test="name" class="font-bold text-gray-900 lg:text-lg">
         {{ item.name }}
       </p>
-      <p v-if="item.text" class="text-base font-normal text-gray-500">
+      <p
+        v-if="item.text"
+        data-test="text"
+        class="text-base font-normal text-gray-500"
+      >
         {{ item.text }}
       </p>
     </li>
