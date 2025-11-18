@@ -18,6 +18,7 @@ defineProps({
 });
 
 const classes = {
+  tr: 'bg-white',
   td: 'px-4 py-3 border-b border-gray-300 text-gray-900',
 };
 </script>
@@ -58,7 +59,7 @@ const classes = {
       <tr
         v-for="(item, index) in data"
         :key="item.id"
-        :class="[hoverable ? 'hover:bg-gray-50' : '']"
+        :class="[classes.tr, hoverable ? 'hover:bg-gray-50' : '']"
       >
         <slot name="td" :item="item" :index="index" :classes="classes" />
       </tr>

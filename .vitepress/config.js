@@ -40,6 +40,7 @@ export default defineConfig({
           { text: 'Sidebar', link: '/components/sidebar' },
           { text: 'Skeleton', link: '/components/skeleton' },
           { text: 'Spinner', link: '/components/spinner' },
+          { text: 'Table', link: '/components/table' },
         ],
       },
     ],

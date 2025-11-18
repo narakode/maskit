@@ -157,7 +157,7 @@ describe('Table', () => {
     });
 
     expect(wrapper.findAll('table tbody tr').map((tr) => tr.classes())).toEqual(
-      data.map(() => ['hover:bg-gray-50']),
+      data.map(() => ['bg-white', 'hover:bg-gray-50']),
     );
   });
   test('should not have hover class on item row when hoverable is false', () => {
@@ -174,7 +174,7 @@ describe('Table', () => {
     });
 
     expect(wrapper.findAll('table tbody tr').map((tr) => tr.classes())).toEqual(
-      data.map(() => []),
+      data.map(() => ['bg-white']),
     );
   });
   test('should not render tfoot by default', () => {
