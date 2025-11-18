@@ -41,6 +41,7 @@ export default defineConfig({
           { text: 'Skeleton', link: '/components/skeleton' },
           { text: 'Spinner', link: '/components/spinner' },
           { text: 'Table', link: '/components/table' },
+          { text: 'Timeline', link: '/components/timeline' },
         ],
       },
     ],
